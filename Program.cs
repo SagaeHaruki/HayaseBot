@@ -46,6 +46,7 @@ namespace HayaseBot
             Commands = Client.UseCommandsNext(config_Prefix);
             Commands.RegisterCommands<HarukiCommands>();
 
+            // Connect the Client
             await Client.ConnectAsync();
             await Task.Delay(-1);
         }

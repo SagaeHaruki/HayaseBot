@@ -11,7 +11,10 @@ namespace HayaseBot.commands
 {
     public class HarukiCommands : BaseCommandModule
     {
+        // Command to use
         [Command("ping")]
+
+        // Run The Command
         public async Task PingCmd(CommandContext ctx)
         {
             var userID = ctx.User.Id;
