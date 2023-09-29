@@ -1,6 +1,7 @@
 ﻿using DSharpPlus; // Use Discord Sharp
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
+using HayaseBot.commands;
 using HayaseBot.config;
 using System.Threading.Tasks;
 
@@ -17,6 +18,8 @@ namespace HayaseBot
             var caster_haruki = new caster_reader();
             await caster_haruki.readCaster();
 
+
+            // Bot Token ID Finder
             var config_Haruki = new DiscordConfiguration()
             {
                 Intents = DiscordIntents.All,
@@ -25,8 +28,23 @@ namespace HayaseBot
                 AutoReconnect = true
             };
 
+            // Ready Client to Start
+            /* !!! IMPORTANT READY MUST BE FIRST OR THE CLIENT WILL NOT RUN !!!*/
             Client = new DiscordClient(config_Haruki);
             Client.Ready += Client_Ready;
+
+            // Bot Command Prefix Finder
+            var config_Prefix = new CommandsNextConfiguration()
+            {
+                StringPrefixes = new string[] { caster_haruki.prefix },
+                EnableMentionPrefix = true,
+                EnableDms = true,
+                EnableDefaultHelp = true
+            };
+
+            // Ready Client Command
+            Commands = Client.UseCommandsNext(config_Prefix);
+            Commands.RegisterCommands<HarukiCommands>();
 
             await Client.ConnectAsync();
             await Task.Delay(-1);
