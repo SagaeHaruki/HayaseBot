@@ -18,7 +18,7 @@ namespace HayaseBot.config
             // Access the Prefix and Token in the json File
             using (StreamReader Read_ME = new StreamReader("caster.json"))
             {
-                // Read shits in th file
+                // Read shits in the file
                 string read_json = await Read_ME.ReadToEndAsync();  
                 caster_structure caster_json = JsonConvert.DeserializeObject<caster_structure>(read_json);
 

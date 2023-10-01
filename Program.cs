@@ -45,7 +45,7 @@ namespace HayaseBot
 
 
             // Event Handler
-            //Client.MessageCreated += Event_Handler;
+            Client.MessageCreated += Event_Handler;
 
             // FIX LATER
             Client.VoiceStateUpdated += VoiceChannel_Handler;
@@ -80,21 +80,21 @@ namespace HayaseBot
             // Logs everything
             if (channel_phase.Channel == null)
             {
-                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | Left the Channel " + channel_phase.Channel + " | TIME >> " + DateTime.Now);
+                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | TIME >> " + DateTime.Now + " | Left the Channel " + channel_phase.Channel);
             }
             else if(channel_phase.Channel != null)
             {
-                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | Joined the Channel >> " + channel_phase.Channel.Name + " | TIME >> " + DateTime.Now);
+                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | TIME >> " + DateTime.Now + " | Joined the Channel >> " + channel_phase.Channel.Name);
             }
         }
-
 
         // Message Logger
         private static async Task Event_Handler(DiscordClient sender, MessageCreateEventArgs event_phase)
         {
             var userID = event_phase.Author.Id;
+            var GuildName = event_phase.Guild.Name;
             var userName = event_phase.Author.Username;
-            var channelID = event_phase.Channel.Name;
+            var channelName = event_phase.Channel.Name;
             var message_sent = event_phase.Message.Content;
             if (userID == 1033001102687346718)
             {
@@ -102,7 +102,7 @@ namespace HayaseBot
             }
             else 
             { 
-                Console.WriteLine("USER ID >> " + userID + " | USERNAME >> " + userName + " | ChannelID >> " + channelID + " | Message Sent >> " + message_sent + " | TIME >> " + DateTime.Now);
+                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | TIME >> " + DateTime.Now + " | ChannelID >> " + channelName + " | Message Sent >> " + message_sent);
             }
 
         }
