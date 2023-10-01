@@ -1,11 +1,14 @@
 ﻿using DSharpPlus; // Use Discord Sharp
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
+using DSharpPlus.Entities;
+using DSharpPlus.VoiceNext;
 using HayaseBot.commands;
 using HayaseBot.config;
 using System.Threading.Tasks;
 using System;
 using System.Threading.Channels;
+using Microsoft.Extensions.Logging;
 
 namespace HayaseBot
 {
@@ -20,6 +23,10 @@ namespace HayaseBot
             var caster_haruki = new caster_reader();
             await caster_haruki.readCaster();
 
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.SetMinimumLevel(LogLevel.Warning);
+            });
 
             // Bot Token ID Finder
             var config_Haruki = new DiscordConfiguration()
@@ -27,7 +34,8 @@ namespace HayaseBot
                 Intents = DiscordIntents.All,
                 Token = caster_haruki.token,
                 TokenType = TokenType.Bot,
-                AutoReconnect = true
+                AutoReconnect = true,
+                LoggerFactory = loggerFactory
             };
 
             // Ready Client to Start
@@ -35,11 +43,12 @@ namespace HayaseBot
             Client = new DiscordClient(config_Haruki);
             Client.Ready += Client_Ready;
 
+
             // Event Handler
-            Client.MessageCreated += Event_Handler;
+            //Client.MessageCreated += Event_Handler;
 
             // FIX LATER
-            // Client.VoiceStateUpdated += VoiceChannel_Handler;
+            Client.VoiceStateUpdated += VoiceChannel_Handler;
 
             // Bot Command Prefix Finder
             var config_Prefix = new CommandsNextConfiguration()
@@ -59,20 +68,26 @@ namespace HayaseBot
             await Task.Delay(-1);
         }
 
+
+
         // Voice Chat Logger (FIX NEXT)
-        /*
+
         private static async Task VoiceChannel_Handler(DiscordClient sender, VoiceStateUpdateEventArgs channel_phase)
         {
+            var userName = channel_phase.User.Username;
+            var GuildName = channel_phase.Guild.Name;
 
-                var userID = channel_phase.User.Id;
-                var userName = channel_phase.User.Username;
-                var channelID = channel_phase.Channel.Name;
-                if (channel_phase.Before == null && channel_phase.Channel.Name == channelID)
-                {
-                    Console.WriteLine("USER ID >> " + userID + " | USERNAME >> " + userName + " | ChannelID Connected >> " + channelID +" | TIME >> " + DateTime.Now);
-                }
+            // Logs everything
+            if (channel_phase.Channel == null)
+            {
+                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | Left the Channel " + channel_phase.Channel + " | TIME >> " + DateTime.Now);
+            }
+            else if(channel_phase.Channel != null)
+            {
+                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | Joined the Channel >> " + channel_phase.Channel.Name + " | TIME >> " + DateTime.Now);
+            }
         }
-        */
+
 
         // Message Logger
         private static async Task Event_Handler(DiscordClient sender, MessageCreateEventArgs event_phase)
@@ -80,13 +95,14 @@ namespace HayaseBot
             var userID = event_phase.Author.Id;
             var userName = event_phase.Author.Username;
             var channelID = event_phase.Channel.Name;
+            var message_sent = event_phase.Message.Content;
             if (userID == 1033001102687346718)
             {
                 // Nothing happens if the user ID is the bot (or this will loop)
             }
             else 
-            {
-                Console.WriteLine("USER ID >> " + userID + " | USERNAME >> " + userName + " | ChannelID " + channelID +" | TIME >> " + DateTime.Now);
+            { 
+                Console.WriteLine("USER ID >> " + userID + " | USERNAME >> " + userName + " | ChannelID >> " + channelID + " | Message Sent >> " + message_sent + " | TIME >> " + DateTime.Now);
             }
 
         }
