@@ -164,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="commands\HarukiCommands.cs" />
+    <Compile Include="commands\ModerationCommand.cs" />
     <Compile Include="config\caster_reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
