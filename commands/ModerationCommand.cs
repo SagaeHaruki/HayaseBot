@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace HayaseBot.commands
 {
@@ -55,7 +56,7 @@ namespace HayaseBot.commands
                 await ctx.RespondAsync(embed1);
 
                 // Logs
-                Console.WriteLine("> USER >> " + ctx.User.Username + " failed to kick " + target.DisplayName + " because it has Administrator Perms!");
+                Console.WriteLine("> USER >> " + ctx.User.Username + " failed to kick " + target.DisplayName + " because it has Administrator Perms! | TIME >> " + DateTime.Now);
                 return;
             }
             else if (cmdUser == target.Id)
@@ -74,7 +75,7 @@ namespace HayaseBot.commands
                     }
                 };
                 await ctx.RespondAsync(embed1);
-                Console.WriteLine("> USER >> " + ctx.User.Username + " Tried to kick themselves from the server but failed!");
+                Console.WriteLine("> USER >> " + ctx.User.Username + " Tried to kick themselves from the server but failed! | TIME >> " + DateTime.Now);
                 return;
             }
             else if (isABot == 1033001102687346718)
@@ -93,7 +94,9 @@ namespace HayaseBot.commands
                     }
                 };
                 await ctx.RespondAsync(embed1);
-                Console.WriteLine("> USER >> " + ctx.User.Username + " Tried to kick me but failed!");
+
+                // Logs Here
+                Console.WriteLine("> USER >> " + ctx.User.Username + " Tried to kick me but failed! | TIME >> " + DateTime.Now);
                 return;
             }
             else
@@ -114,7 +117,9 @@ namespace HayaseBot.commands
                     }
                 };
                 await ctx.RespondAsync(embed1);
-                Console.WriteLine("> USER >> " + ctx.User.Username + " Kicked " + target.DisplayName + " | Reason >> " + reason);
+
+                // Logs Here
+                Console.WriteLine("> USER >> " + ctx.User.Username + " Kicked " + target.DisplayName + " | Reason >> " + reason + " | TIME >> " + DateTime.Now);
                 return;
             }
         }
@@ -190,7 +195,9 @@ namespace HayaseBot.commands
                 };
 
                 await ctx.RespondAsync(embed3);
-                Console.WriteLine("> USER >> " + ctx.User.Username + " Cleared the chat from  " + ctx.Channel.Name);
+
+                // Logs Here
+                Console.WriteLine("> USER >> " + ctx.User.Username + " Cleared the chat from  " + ctx.Channel.Name + " | TIME >> " + DateTime.Now);
                 return;
             }
             catch
@@ -207,7 +214,9 @@ namespace HayaseBot.commands
                 };
 
                 await ctx.RespondAsync(embed3);
-                Console.WriteLine("> USER >> " + ctx.User.Username + " was unable to clear the chat because the message was 14 days older");
+
+                // Logs Here
+                Console.WriteLine("> USER >> " + ctx.User.Username + " was unable to clear the chat because the message was 14 days older | TIME >> " + DateTime.Now);
             }
         }
     }
