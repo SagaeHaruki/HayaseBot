@@ -86,7 +86,7 @@ namespace HayaseBot
             await Task.Delay(-1);
         }
 
-        // Command Cooldown Catcher
+        // Command Cooldown Cat
         private static async Task CommandHandler(CommandsNextExtension sender, CommandErrorEventArgs err)
         {
             Random random = new Random();
@@ -96,18 +96,21 @@ namespace HayaseBot
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
+            var userName = err.Context.User.Username;
+
             if (err.Exception is ChecksFailedException exception)
             {
                 string timeLeft = string.Empty;
                 foreach (var check in exception.FailedChecks)
                 {
                     var cmdCooldown = (CooldownAttribute)check;
-                    timeLeft = cmdCooldown.GetRemainingCooldown(err.Context).ToString(@"hh\:mm\:ss");
+                    timeLeft = cmdCooldown.GetRemainingCooldown(err.Context).TotalSeconds.ToString();
                 }
+                int timeSec = (int)Math.Floor(Convert.ToDecimal(timeLeft));
 
                 var embed1 = new DiscordEmbedBuilder
                 {
-                    Title = "Command on cooldown!! " + timeLeft,
+                    Title = "Command on cooldown!! " + timeSec + "s",
                     Color = randomCol,
                     Footer = new DiscordEmbedBuilder.EmbedFooter
                     {
@@ -116,6 +119,7 @@ namespace HayaseBot
                     }
                 };
                 await err.Context.RespondAsync(embed1);
+                Console.WriteLine("> USERNAME >> " + userName + " |   Used a Command but is on Cooldown!   |   TIME >> " + DateTime.Now);
             }
         }
 

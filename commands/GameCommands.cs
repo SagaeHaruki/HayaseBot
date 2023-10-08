@@ -48,7 +48,7 @@ namespace HayaseBot.commands
         }
 
         [Command("search")]
-        [Cooldown(1, 10, CooldownBucketType.User)]
+        [Cooldown(1, 36, CooldownBucketType.User)]
         public async Task SearchFor(CommandContext ctx, [RemainingText] string place = null)
         {
             try
