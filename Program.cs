@@ -9,6 +9,13 @@ using System.Threading.Tasks;
 using System;
 using System.Threading.Channels;
 using Microsoft.Extensions.Logging;
+using DSharpPlus.SlashCommands;
+using HayaseBot.slash_cmd;
+using System.Runtime.InteropServices.ComTypes;
+using HayaseBot.slash_cmd;
+using HayaseBot.commands;
+using DSharpPlus.CommandsNext.Exceptions;
+using DSharpPlus.CommandsNext.Attributes;
 
 namespace HayaseBot
 {
@@ -61,12 +68,55 @@ namespace HayaseBot
 
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
+
+            // Command Error
+            Commands.CommandErrored += CommandHandler;
+            var SlashCommandsBld = Client.UseSlashCommands();
+
+            // Normal Commands Only 
             Commands.RegisterCommands<HarukiCommands>();
             Commands.RegisterCommands<ModerationCommand>();
+            Commands.RegisterCommands<GameCommands>();
+
+            // Slash Commands Only
+            SlashCommandsBld.RegisterCommands<Hayase>();
 
             // Connect the Client
             await Client.ConnectAsync();
             await Task.Delay(-1);
+        }
+
+        // Command Cooldown Catcher
+        private static async Task CommandHandler(CommandsNextExtension sender, CommandErrorEventArgs err)
+        {
+            Random random = new Random();
+
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            if (err.Exception is ChecksFailedException exception)
+            {
+                string timeLeft = string.Empty;
+                foreach (var check in exception.FailedChecks)
+                {
+                    var cmdCooldown = (CooldownAttribute)check;
+                    timeLeft = cmdCooldown.GetRemainingCooldown(err.Context).ToString(@"hh\:mm\:ss");
+                }
+
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "Command on cooldown!! " + timeLeft,
+                    Color = randomCol,
+                    Footer = new DiscordEmbedBuilder.EmbedFooter
+                    {
+                        Text = DateTime.Now.ToString("hh:mm tt"),
+                        IconUrl = null
+                    }
+                };
+                await err.Context.RespondAsync(embed1);
+            }
         }
 
 
