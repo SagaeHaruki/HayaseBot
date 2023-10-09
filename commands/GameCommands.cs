@@ -173,8 +173,6 @@ namespace HayaseBot.commands
                 int randomAttic = random.Next(0, listOfAttic.Length);
                 string atticSel = listOfAttic[randomAttic];
 
-
-
                 // SQL CONNECT
                 SqlConnection connection1 = new SqlConnection(sqlClientACC);
                 connection1.Open();
@@ -222,7 +220,7 @@ namespace HayaseBot.commands
 
                                 var embed1 = new DiscordEmbedBuilder
                                 {
-                                    Title = "You searched the bed and found " + coinRandom + " coins!",
+                                    Title = bedSel + coinRandom + " coins!",
                                     Description = "New balance is " + addedBal,
                                     Color = randomCol,
                                     Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -244,7 +242,7 @@ namespace HayaseBot.commands
 
                                     var embed1 = new DiscordEmbedBuilder
                                     {
-                                        Title = "You searched a vault pocket and got Caught!",
+                                        Title = vaultSel2,
                                         Description = "You lost: " + coinRandom + "\nNew balance is " + deductBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -254,6 +252,7 @@ namespace HayaseBot.commands
                                         }
                                     };
                                     await ctx.RespondAsync(embed1);
+                                    return;
                                 }
                                 else
                                 {
@@ -263,7 +262,7 @@ namespace HayaseBot.commands
 
                                     var embed1 = new DiscordEmbedBuilder
                                     {
-                                        Title = "You searched the vault and found " + coinRandom + " coins!",
+                                        Title = vaultSel + coinRandom + " coins!",
                                         Description = "New balance is " + addedBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -286,7 +285,7 @@ namespace HayaseBot.commands
 
                                     var embed1 = new DiscordEmbedBuilder
                                     {
-                                        Title = "You searched a person's pocket and got Caught!",
+                                        Title = pockSel2,
                                         Description = "You lost: " + coinRandom + "\nNew balance is " + deductBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -296,6 +295,7 @@ namespace HayaseBot.commands
                                         }
                                     };
                                     await ctx.RespondAsync(embed1);
+                                    return;
                                 }
                                 else
                                 {
@@ -304,7 +304,7 @@ namespace HayaseBot.commands
 
                                     var embed1 = new DiscordEmbedBuilder
                                     {
-                                        Title = "You searched a person's pocket and got " + coinRandom + " coins!",
+                                        Title = pockSel + coinRandom + " coins!",
                                         Description = "New balance is " + addedBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -325,7 +325,7 @@ namespace HayaseBot.commands
 
                                 var embed1 = new DiscordEmbedBuilder
                                 {
-                                    Title = "You searched the Attic and found " + coinRandom + " coins!",
+                                    Title = atticSel + coinRandom + " coins!",
                                     Description = "New balance is " + addedBal,
                                     Color = randomCol,
                                     Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -345,7 +345,7 @@ namespace HayaseBot.commands
 
                                 var embed1 = new DiscordEmbedBuilder
                                 {
-                                    Title = "You searched the Closet and found " + coinRandom + " coins!",
+                                    Title = closetSel + coinRandom + " coins!",
                                     Description = "New balance is " + addedBal,
                                     Color = randomCol,
                                     Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -367,7 +367,7 @@ namespace HayaseBot.commands
 
                                     var embed1 = new DiscordEmbedBuilder
                                     {
-                                        Title = "You searched a person's wallet and got Caught!",
+                                        Title = walletSel2,
                                         Description = "You lost: " + coinRandom + "\nNew balance is " + deductBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -377,6 +377,7 @@ namespace HayaseBot.commands
                                         }
                                     };
                                     await ctx.RespondAsync(embed1);
+                                    return;
                                 }
                                 else
                                 {
@@ -385,7 +386,7 @@ namespace HayaseBot.commands
 
                                     var embed1 = new DiscordEmbedBuilder
                                     {
-                                        Title = "You searched a person's wallet and got " + coinRandom + " coins!",
+                                        Title = walletSel + coinRandom + " coins!",
                                         Description = "New balance is " + addedBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -517,5 +518,76 @@ namespace HayaseBot.commands
             };
             await ctx.RespondAsync(embed1);
         }
+
+        [Command("bal")]
+        public async Task BalanceCommand(CommandContext ctx)
+        {
+            // Color Randomizer
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            var cmdUser = ctx.User.Id;
+
+            // SQL CONNECT
+            SqlConnection connection1 = new SqlConnection(sqlClientACC);
+            connection1.Open();
+
+            // Select the user from database
+            // If not in the database then add first before adding the value of money
+            string userSelectDB = "Select * From UserBank Where UserID = '"+cmdUser+"'";
+            SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
+            SqlDataReader readUser = selectUser.ExecuteReader();
+            if (readUser.Read())
+            {
+                // Read the user Account First
+                SqlConnection connection2 = new SqlConnection(sqlClientACC);
+                connection2.Open();
+                string runCMDD = "Select Bank, Wallet From UserBank Where UserID = '"+cmdUser+"'";
+                SqlCommand AddAcc = new SqlCommand(runCMDD, connection2);
+                SqlDataReader readAcc = AddAcc.ExecuteReader();
+
+                // Reads the user's account in the Database
+                while (readAcc.Read())
+                {
+                    long walletBal = (long)readAcc["Wallet"];
+                    long bankBal = (long)readAcc["Bank"];
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "Your current balance is: ",
+                        Description = "Wallet: " + walletBal + "\nBank: " + bankBal,
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+            }
+            else
+            {
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "You are not registered in the database!",
+                    Description = "Use the beg command to register",
+                    Color = randomCol,
+                    Footer = new DiscordEmbedBuilder.EmbedFooter
+                    {
+                        Text = DateTime.Now.ToString("hh:mm tt"),
+                        IconUrl = null
+                    }
+                };
+                await ctx.RespondAsync(embed1);
+                return;
+            }
+        }
+
+
+
     }
 }
