@@ -22,6 +22,10 @@ namespace HayaseBot.commands
 
         private Random random = new Random();
 
+        /*
+         * EASIEST OF THEM ALL THE BEG COMMAND
+         */
+
         [Command("beg")]
         public async Task BegCommand(CommandContext ctx)
         {
@@ -46,9 +50,12 @@ namespace HayaseBot.commands
             };
             await ctx.RespondAsync(embed1);
         }
+        /*
+         * THIS IS THE SEARCH SECTION; YEAH SO MANY RANDOMIZERS :D
+         */
 
         [Command("search")]
-        [Cooldown(1, 36, CooldownBucketType.User)]
+        [Cooldown(1, 4, CooldownBucketType.User)]
         public async Task SearchFor(CommandContext ctx, [RemainingText] string place = null)
         {
             try
@@ -60,8 +67,114 @@ namespace HayaseBot.commands
                 DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
                 var cmdUser = ctx.User.Id;
-                int coinRandom = random.Next(10, 201);
-               
+                int coinRandom = random.Next(30, 251);
+
+                // Array Of Strings to randomize messages for the user
+                // Bed String Array
+                string[] listOfBed = new string[]
+                {
+                    "You searched under the bed and found: ",
+                    "You searched near the bed and found: ",
+                    "You searched on your mom's bed and found: ",
+                    "You searched under your mom's bed and found: ",
+                    "You searched the boxes under the bed and found: ",
+                    "You searched the old boxes under the bed and found: ",
+                    "You searched under your bed and found: ",
+                    "You searched the toy box near your bed and found: "
+                };
+
+                // Vault String Array
+                string[] listOfVault = new string[]
+                {
+                    "You unlocked your vault and found: ",
+                    "You unlocked your hidden vault and found: ",
+                    "You lockpicked your neighbor's vault and found: ",
+                    "You hammer a old vault and found: "
+                };
+                string[] listOfVaultfail = new string[]
+                {
+                    "You tried to lockpick your dad's vault but got Caught!",
+                    "You tried to steal in your neighbor's vault and got Caught!",
+                    "You entered the bank's vault to steal bot got Caught!",
+                };
+
+                // Pocket String Array
+                string[] listOfPocket = new string[]
+                {
+                    "You unlocked your vault and found: ",
+                    "You unlocked your hidden vault and found: ",
+                    "You lockpicked your neighbor's vault and found: ",
+                    "You hammer a old vault and found: "
+                };
+                string[] listOfPocketfail = new string[]
+                {
+                    "You tried to lockpick your dad's vault but got Caught!",
+                    "You tried to steal in your neighbor's vault and got Caught!",
+                    "You entered the bank's vault to steal bot got Caught!",
+                };
+
+                // Wallet String Array
+                string[] listOfWallet = new string[]
+                {
+                    "You looked at your wallet and got: ",
+                    "You check your mom's wallet and got: ",
+                    "You found your old wallet and got: ",
+                    "You steal someone's wallet and got: "
+                };
+                string[] listOfWalletfail = new string[]
+                {
+                    "You tried to steal in your mom's wallet but got Caught!",
+                    "You tried to steal someone's wallet but got Caught!",
+                    "You got robbed while trying to check your wallet!",
+                };
+
+                // Closet String Array
+                string[] listOfCloset = new string[]
+                {
+                    "You searched the clothes in the closet and got: ",
+                    "You searched the small boxes in the closet and got: ",
+                    "You opened your old savings wallet in the closet and got: ",
+                    "You grab your boxes on top of the closet and got: ",
+                };
+
+                // Attic String Array
+                string[] listOfAttic = new string[]
+                {
+                    "You searched the old boxes at the attic and got: ",
+                    "You searched the piggy bannk at the attic and got: ",
+                    "You found an old wallet at the attic and got: ",
+                    "You found a small box at the attic and got: ",
+                };
+                /*
+                 * RANDOMIZER SECTION FOR THE LIST OF ARRAY STRINGS
+                 */
+                // Bed
+                int randomBed = random.Next(0, listOfBed.Length);
+                string bedSel = listOfBed[randomBed];
+                // Vault
+                int randomVault = random.Next(0, listOfVault.Length);
+                string vaultSel = listOfVault[randomVault];
+                int randomVault2 = random.Next(0, listOfVaultfail.Length);
+                string vaultSel2 = listOfVaultfail[randomVault2];
+                // Pocket
+                int randomPock = random.Next(0, listOfPocket.Length);
+                string pockSel = listOfPocket[randomPock];
+                int randomPock2 = random.Next(0, listOfPocketfail.Length);
+                string pockSel2 = listOfPocketfail[randomPock2];
+                // Wallet
+                int randomWallet = random.Next(0, listOfWallet.Length);
+                string walletSel = listOfWallet[randomWallet];
+                int randomWallet2 = random.Next(0, listOfWalletfail.Length);
+                string walletSel2 = listOfWalletfail[randomWallet2];
+                // Closet
+                int randomCloset = random.Next(0, listOfCloset.Length);
+                string closetSel = listOfCloset[randomCloset];
+                // Attic
+                int randomAttic = random.Next(0, listOfAttic.Length);
+                string atticSel = listOfAttic[randomAttic];
+
+
+
                 // SQL CONNECT
                 SqlConnection connection1 = new SqlConnection(sqlClientACC);
                 connection1.Open();
@@ -124,15 +237,15 @@ namespace HayaseBot.commands
                             }
                             else if (place2 == "vault")
                             {
-                                if (coinRandom <= 150)
+                                if (coinRandom >= 150)
                                 {
                                     SqlCommand commnd = new SqlCommand(runCommd2, connection6);
                                     commnd.ExecuteNonQuery();
 
                                     var embed1 = new DiscordEmbedBuilder
                                     {
-                                        Title = "You searched a person's pocket and got Caught!",
-                                        Description = "New balance is " + addedBal,
+                                        Title = "You searched a vault pocket and got Caught!",
+                                        Description = "You lost: " + coinRandom + "\nNew balance is " + deductBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
                                         {
@@ -150,7 +263,7 @@ namespace HayaseBot.commands
 
                                     var embed1 = new DiscordEmbedBuilder
                                     {
-                                        Title = "You searched the bed and found " + coinRandom + " coins!",
+                                        Title = "You searched the vault and found " + coinRandom + " coins!",
                                         Description = "New balance is " + addedBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
@@ -166,7 +279,7 @@ namespace HayaseBot.commands
                             }
                             else if (place2 == "pocket")
                             {
-                                if (coinRandom <= 150)
+                                if (coinRandom >= 150)
                                 {
                                     SqlCommand commnd = new SqlCommand(runCommd2, connection6);
                                     commnd.ExecuteNonQuery();
@@ -174,7 +287,7 @@ namespace HayaseBot.commands
                                     var embed1 = new DiscordEmbedBuilder
                                     {
                                         Title = "You searched a person's pocket and got Caught!",
-                                        Description = "New balance is " + addedBal,
+                                        Description = "You lost: " + coinRandom + "\nNew balance is " + deductBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
                                         {
@@ -247,7 +360,7 @@ namespace HayaseBot.commands
                             }
                             else if (place2 == "wallet")
                             {
-                                if (coinRandom <= 150)
+                                if (coinRandom >= 150)
                                 {
                                     SqlCommand commnd = new SqlCommand(runCommd2, connection6);
                                     commnd.ExecuteNonQuery();
@@ -255,7 +368,7 @@ namespace HayaseBot.commands
                                     var embed1 = new DiscordEmbedBuilder
                                     {
                                         Title = "You searched a person's wallet and got Caught!",
-                                        Description = "New balance is " + addedBal,
+                                        Description = "You lost: " + coinRandom + "\nNew balance is " + deductBal,
                                         Color = randomCol,
                                         Footer = new DiscordEmbedBuilder.EmbedFooter
                                         {
@@ -377,6 +490,10 @@ namespace HayaseBot.commands
                 Console.WriteLine("Code Error!! " + exe);
             }
         }
+
+        /*
+         * WHY IS THIS EVEN HERE?
+         */
 
         [Command("searchlist")]
         public async Task SearchList(CommandContext ctx)
