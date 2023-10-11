@@ -725,7 +725,7 @@ namespace HayaseBot.commands
         }
 
         [Command("withdraw")]
-        public async Task WithdrawCMD(CommandContext ctx)
+        public async Task WithdrawCMD(CommandContext ctx, int amt)
         {
             // Color Randomizer
             int red = random.Next(256);
@@ -745,6 +745,20 @@ namespace HayaseBot.commands
             if (readUser.Read())
             {
 
+                //
+                SqlConnection connection2 = new SqlConnection(sqlClientACC);
+                connection2.Open();
+                string runCMDD = "Select Bank, Wallet From UserBank Where UserID = '"+cmdUser+"'";
+                SqlCommand AddAcc = new SqlCommand(runCMDD, connection2);
+                SqlDataReader readAcc = AddAcc.ExecuteReader();
+
+                while (readAcc.Read())
+                {
+                    SqlConnection connection6 = new SqlConnection(sqlClientACC);
+                    connection6.Open();
+                    long currentBal = (long)readAcc["Wallet"];
+                    
+                }
             }
             else
             {
