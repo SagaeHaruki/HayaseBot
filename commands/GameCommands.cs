@@ -651,6 +651,11 @@ namespace HayaseBot.commands
             await ctx.RespondAsync(embed1);
         }
 
+        /*
+         * BALANCE COMMAND WELL YEAH YOU KNOW WHAT IT DOES
+         */
+
+
         [Command("bal")]
         public async Task BalanceCommand(CommandContext ctx)
         {
@@ -717,6 +722,88 @@ namespace HayaseBot.commands
                 await ctx.RespondAsync(embed1);
                 return;
             }
+        }
+
+        [Command("withdraw")]
+        public async Task WithdrawCMD(CommandContext ctx)
+        {
+            // Color Randomizer
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            // First Check if the user is registered to the database
+
+            var cmdUser = ctx.User.Id;
+
+            SqlConnection connection1 = new SqlConnection(sqlClientACC);
+            connection1.Open();
+            string userSelectDB = "Select * From UserBank Where UserID = '"+cmdUser+"'";
+            SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
+            SqlDataReader readUser = selectUser.ExecuteReader();
+            if (readUser.Read())
+            {
+
+            }
+            else
+            {
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "You are not registered in the database!",
+                    Description = "Use the beg command to register",
+                    Color = randomCol,
+                    Footer = new DiscordEmbedBuilder.EmbedFooter
+                    {
+                        Text = DateTime.Now.ToString("hh:mm tt"),
+                        IconUrl = null
+                    }
+                };
+                await ctx.RespondAsync(embed1);
+                return;
+            }
+            connection1.Close();
+        }
+
+        [Command("deposit")]
+        public async Task DepositCMD(CommandContext ctx)
+        {
+            // Color Randomizer
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            // First Check if the user is registered to the database
+
+            var cmdUser = ctx.User.Id;
+
+            SqlConnection connection1 = new SqlConnection(sqlClientACC);
+            connection1.Open();
+            string userSelectDB = "Select * From UserBank Where UserID = '"+cmdUser+"'";
+            SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
+            SqlDataReader readUser = selectUser.ExecuteReader();
+            if (readUser.Read())
+            {
+
+            }
+            else
+            {
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "You are not registered in the database!",
+                    Description = "Use the beg command to register",
+                    Color = randomCol,
+                    Footer = new DiscordEmbedBuilder.EmbedFooter
+                    {
+                        Text = DateTime.Now.ToString("hh:mm tt"),
+                        IconUrl = null
+                    }
+                };
+                await ctx.RespondAsync(embed1);
+                return;
+            }
+            connection1.Close();
         }
     }
 }
