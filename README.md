@@ -35,6 +35,14 @@ Discord bot using C#
 - Beg Command (Connected to Database)
 - Bal Command (Now adds you to the database if not yet added in it)
 
+- [Oct. 11, 2023]
+- Bank Commands Added
+- Withdraw and Deposit Command
+
+- [Oct. 12, 2023]
+- Command Files Optimization
+- Finished Withdraw and Deposit Command
+
 
 
 
