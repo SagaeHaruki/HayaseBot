@@ -169,9 +169,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="commands\BankCommands.cs" />
     <Compile Include="commands\GameCommands.cs" />
-    <Compile Include="commands\HarukiCommands.cs" />
+    <Compile Include="commands\BasicCommands.cs" />
     <Compile Include="commands\ModerationCommand.cs" />
+    <Compile Include="commands\SearchCmd.cs" />
     <Compile Include="config\caster_reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

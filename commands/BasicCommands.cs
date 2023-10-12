@@ -14,7 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace HayaseBot.commands
 {
-    public class HarukiCommands : BaseCommandModule
+    public class BasicCommands : BaseCommandModule
     {
         private Random random = new Random();
 

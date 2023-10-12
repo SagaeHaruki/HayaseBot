@@ -74,9 +74,11 @@ namespace HayaseBot
             var SlashCommandsBld = Client.UseSlashCommands();
 
             // Normal Commands Only 
-            Commands.RegisterCommands<HarukiCommands>();
+            Commands.RegisterCommands<BasicCommands>();
             Commands.RegisterCommands<ModerationCommand>();
             Commands.RegisterCommands<GameCommands>();
+            Commands.RegisterCommands<SearchCmd>();
+            Commands.RegisterCommands<BankCommands>();
 
             // Slash Commands Only
             SlashCommandsBld.RegisterCommands<Hayase>();
