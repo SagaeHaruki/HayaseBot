@@ -44,6 +44,11 @@ Discord bot using C#
 - Finished Withdraw and Deposit Command
 - Slot machine Command (Not Connected to Database)
 
+- [Oct. 13, 2023]
+- Fix Some Commands
+- Optimizations
+  
+
 
 
 
