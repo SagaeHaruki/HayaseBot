@@ -62,6 +62,7 @@ namespace HayaseBot.commands
 
             // Logger
             var userName = ctx.User.Username;
+            var ServerOwner = ctx.Guild.Owner;
 
             var msg_toSend = new DiscordEmbedBuilder
             {

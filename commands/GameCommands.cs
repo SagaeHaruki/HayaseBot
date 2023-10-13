@@ -258,7 +258,7 @@ namespace HayaseBot.commands
          * Slot Machine Command
          */
         [Command("slotmachine")]
-        public async Task SlotMachineCMD(CommandContext ctx)
+        public async Task SlotMachineCMD(CommandContext ctx, [RemainingText] int amt = 0)
         {
             int red = random.Next(256);
             int green = random.Next(256);
@@ -266,6 +266,8 @@ namespace HayaseBot.commands
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
             var cmdUser = ctx.User.Id;
+            var UserInput = amt;
+
             string[] items = { "💸", "🍉", "❌", "🍋 ", "♥️", "🍒" };
             int randomIndex1 = random.Next(items.Length);
             int randomIndex2 = random.Next(items.Length);
@@ -274,14 +276,11 @@ namespace HayaseBot.commands
             string rand2 = items[randomIndex2];
             string rand3 = items[randomIndex3];
 
-            if (rand1 == "💸" && rand2 == "💸" && rand3 == "💸")
+            if (UserInput > 300)
             {
-                // Double the amt
-
                 var embed1 = new DiscordEmbedBuilder
                 {
-                    Title = "SLOT MACHINE!",
-                    Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
+                    Title = "Maximum bet to slot machine is 300",
                     Color = randomCol,
                     Footer = new DiscordEmbedBuilder.EmbedFooter
                     {
@@ -292,30 +291,11 @@ namespace HayaseBot.commands
                 await ctx.RespondAsync(embed1);
                 return;
             }
-            else if (rand1 == "🍒" && rand2 == "🍒" && rand3 == "🍒")
+            else if (UserInput == 0)
             {
-                // +150 the amt
                 var embed1 = new DiscordEmbedBuilder
                 {
-                    Title = "SLOT MACHINE!",
-                    Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
-                    Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
-                };
-                await ctx.RespondAsync(embed1);
-                return;
-            }
-            else if (rand1 == "🍉" && rand2 == "🍉" && rand3 == "🍉")
-            {
-                // +50 the amt
-                var embed1 = new DiscordEmbedBuilder
-                {
-                    Title = "SLOT MACHINE!",
-                    Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
+                    Title = "Enter a bet to use the slot machine",
                     Color = randomCol,
                     Footer = new DiscordEmbedBuilder.EmbedFooter
                     {
@@ -328,21 +308,76 @@ namespace HayaseBot.commands
             }
             else
             {
-                // Lost = amt input
-                var embed1 = new DiscordEmbedBuilder
+                if (rand1 == "💸" && rand2 == "💸" && rand3 == "💸")
                 {
-                    Title = "SLOT MACHINE!",
-                    Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYOU LOST!",
-                    Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
+                    // Double the amt
+
+                    var embed1 = new DiscordEmbedBuilder
                     {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
-                };
-                await ctx.RespondAsync(embed1);
-                return;
-            }
+                        Title = "SLOT MACHINE!",
+                        Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else if (rand1 == "🍒" && rand2 == "🍒" && rand3 == "🍒")
+                {
+                    // +150 the amt
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "SLOT MACHINE!",
+                        Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else if (rand1 == "🍉" && rand2 == "🍉" && rand3 == "🍉")
+                {
+                    // +50 the amt
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "SLOT MACHINE!",
+                        Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else
+                {
+                    // Lost = amt input
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "SLOT MACHINE!",
+                        Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYOU LOST!",
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+            };
         }
     }
 }

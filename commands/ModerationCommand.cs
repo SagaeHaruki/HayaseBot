@@ -130,7 +130,7 @@ namespace HayaseBot.commands
         [Command("clear")]
         [Description("Clear the messages in a channel")]
         [RequirePermissions(Permissions.Administrator)]
-        public async Task ClearChat(CommandContext ctx, int amt)
+        public async Task ClearChat(CommandContext ctx,[RemainingText] int amt = 0)
         {
             // Color Randomizer
             int red = random.Next(256);
@@ -164,7 +164,22 @@ namespace HayaseBot.commands
                 }
 
                 // Check if amt is between 1 or 100
-                if (amt < 1 || amt > 100)
+                if (amt == 0)
+                {             
+                    var embed3 = new DiscordEmbedBuilder
+                    {
+                        Title = "Enter between 1 - 100 amount to be cleared!",
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
+
+                    await ctx.RespondAsync(embed3);
+                }
+                else if (amt < 1 || amt > 100) 
                 {
                     var embed1 = new DiscordEmbedBuilder
                     {
@@ -179,23 +194,25 @@ namespace HayaseBot.commands
                     await ctx.RespondAsync(embed1);
                     return;
                 }
-
-                await ctx.Channel.DeleteMessagesAsync(messageCount);
-
-                await Task.Delay(3000);
-                var embed3 = new DiscordEmbedBuilder
+                else
                 {
-                    Title = "Chat cleared by " + userCmd,
-                    Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
+                    await ctx.Channel.DeleteMessagesAsync(messageCount);
+
+                    await Task.Delay(3000);
+                    var embed3 = new DiscordEmbedBuilder
                     {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
-                };
+                        Title = "Chat cleared by " + userCmd,
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
 
-                await ctx.RespondAsync(embed3);
-
+                    await ctx.RespondAsync(embed3);
+                }
+       
                 // Logs Here
                 Console.WriteLine("> USERNAME >> " + ctx.User.Username + " Cleared the chat from  " + ctx.Channel.Name + " | TIME >> " + DateTime.Now);
                 return;
