@@ -306,15 +306,11 @@ namespace HayaseBot.commands
                     SqlConnection connection6 = new SqlConnection(sqlClientACC);
                     connection6.Open();
                     long currentBal = (long)readAcc["Wallet"];
-
+                    long maxWin = UserInput * 2;
+                    long midWin = UserInput + 150;
 
                     if (currentBal >= UserInput)
                     {
-
-
-
-
-
                         if (UserInput > 300)
                         {
                             var embed1 = new DiscordEmbedBuilder
