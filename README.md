@@ -47,6 +47,10 @@ Discord bot using C#
 - [Oct. 13, 2023]
 - Fix Some Commands
 - Optimizations
+
+- [Oct. 14, 2023]
+- Message Logger Optimization
+- Removed Command Logger (Since it is already being logged automatically)
   
 
 
