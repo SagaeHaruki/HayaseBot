@@ -121,12 +121,9 @@ namespace HayaseBot
                     }
                 };
                 await err.Context.RespondAsync(embed1);
-                Console.WriteLine("> USERNAME >> " + userName + " |   Used a Command but is on Cooldown!   |   TIME >> " + DateTime.Now);
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME >>  " + userName + "  |  Used a Command but was unable to due to command cooldowns");
             }
         }
-
-
-
         // Voice Chat Logger (FIX NEXT)
 
         private static async Task VoiceChannel_Handler(DiscordClient sender, VoiceStateUpdateEventArgs channel_phase)
@@ -137,11 +134,13 @@ namespace HayaseBot
             // Logs everything
             if (channel_phase.Channel == null)
             {
-                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | TIME >> " + DateTime.Now + " | Left the Channel " + channel_phase.Channel);
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME >>  " + userName + "  |  GUILD NAME :" + GuildName + "  |  Left the Channel " + channel_phase.Channel);
+                return;
             }
             else if(channel_phase.Channel != null)
             {
-                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | TIME >> " + DateTime.Now + " | Joined the Channel >> " + channel_phase.Channel.Name);
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME >>  " + userName + "  |  GUILD NAME :" + GuildName + "  |  Joined the Channel >> " + channel_phase.Channel.Name);
+                return;
             }
         }
 
@@ -159,7 +158,7 @@ namespace HayaseBot
             }
             else 
             { 
-                Console.WriteLine("> USERNAME >> " + userName + " | GUILD NAME :" + GuildName + " | TIME >> " + DateTime.Now + " | ChannelID >> " + channelName + " | Message Sent >> " + message_sent);
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME >>  " + userName + "  |  GUILD NAME :" + GuildName + "  |  ChannelID >> " + channelName + "  |  Message Sent >> " + message_sent);
             }
 
         }

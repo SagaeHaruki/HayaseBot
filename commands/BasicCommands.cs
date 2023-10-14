@@ -45,8 +45,6 @@ namespace HayaseBot.commands
                 }
             };
             await ctx.RespondAsync(embed1);
-            // Console
-            Console.WriteLine("> USERNAME >> " + userName + " |   PING COMMAND   | TIME >> " + DateTime.Now);
             return;
         }
 
@@ -71,9 +69,6 @@ namespace HayaseBot.commands
                 Color = randomCol,
             };
             await ctx.Channel.SendMessageAsync(embed: msg_toSend);
-
-            // Console
-            Console.WriteLine("> USERNAME >> " + userName + " |   SERVER INFO COMMAND   | TIME >> " + DateTime.Now);
         }
     }
 }
