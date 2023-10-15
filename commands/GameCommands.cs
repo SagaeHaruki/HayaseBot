@@ -27,7 +27,7 @@ namespace HayaseBot.commands
          */
 
         [Command("beg")]
-        [Cooldown(1, 12, CooldownBucketType.User)]
+        [Cooldown(1, 17, CooldownBucketType.User)]
         public async Task BegCommand(CommandContext ctx)
         {
             string[] listOfBegged = new string[]

@@ -18,7 +18,7 @@ namespace HayaseBot.commands
         private Random random = new Random();
 
         [Command("search")]
-        [Cooldown(1, 15, CooldownBucketType.User)]
+        [Cooldown(1, 25, CooldownBucketType.User)]
         public async Task SearchFor(CommandContext ctx, [RemainingText] string place = null)
         {
             try
