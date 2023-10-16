@@ -4,10 +4,14 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
-- [Oct. 15, 2023]
-- Slot machine command configuration
+- [Oct. 16, 2023]
+- Added Prizes to the slot machine command
+- (Admin Command) Give Users AMT to (Wallet Only)
 
 <h1>Past Changes</h1>
+
+- [Oct. 15, 2023]
+- Slot machine command configuration
 
 - [Oct. 14, 2023]
 - Message Logger Optimization
