@@ -134,12 +134,12 @@ namespace HayaseBot
             // Logs everything
             if (channel_phase.Channel == null)
             {
-                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME >>  " + userName + "  |  GUILD NAME :" + GuildName + "  |  Left the Channel " + channel_phase.Channel);
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  Left the Channel " + channel_phase.Channel);
                 return;
             }
             else if(channel_phase.Channel != null)
             {
-                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME >>  " + userName + "  |  GUILD NAME :" + GuildName + "  |  Joined the Channel >> " + channel_phase.Channel.Name);
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  Joined the Channel >> " + channel_phase.Channel.Name);
                 return;
             }
         }
@@ -158,7 +158,7 @@ namespace HayaseBot
             }
             else 
             { 
-                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME >>  " + userName + "  |  GUILD NAME :" + GuildName + "  |  ChannelID >> " + channelName + "  |  Message Sent >> " + message_sent);
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  ChannelName: " + channelName + "  |  Message Sent:  " + message_sent);
             }
 
         }

@@ -329,6 +329,10 @@ namespace HayaseBot.commands
                         if (rand1 == "💸" && rand2 == "💸" && rand3 == "💸")
                         {
                             // Double the amt
+                            string rumCMD = "UPDATE UserBank Set Wallet = '"+tCashWin+"' Where UserID = '"+cmdUser+"'";
+
+                            SqlCommand commnd = new SqlCommand(rumCMD, connection6);
+                            commnd.ExecuteNonQuery();
 
                             var embed1 = new DiscordEmbedBuilder
                             {
@@ -349,6 +353,11 @@ namespace HayaseBot.commands
                          */
                         else if (rand1 == "🍒" && rand2 == "🍒" && rand3 == "🍒")
                         {
+                            string rumCMD = "UPDATE UserBank Set Wallet = '"+tCherryWin+"' Where UserID = '"+cmdUser+"'";
+
+                            SqlCommand commnd = new SqlCommand(rumCMD, connection6);
+                            commnd.ExecuteNonQuery();
+
                             var embed1 = new DiscordEmbedBuilder
                             {
                                 Title = "SLOT MACHINE!",
@@ -368,6 +377,11 @@ namespace HayaseBot.commands
                          */
                         else if (rand1 == "🍉" && rand2 == "🍉" && rand3 == "🍉")
                         {
+                            string rumCMD = "UPDATE UserBank Set Wallet = '"+tMelon+"' Where UserID = '"+cmdUser+"'";
+
+                            SqlCommand commnd = new SqlCommand(rumCMD, connection6);
+                            commnd.ExecuteNonQuery();
+
                             var embed1 = new DiscordEmbedBuilder
                             {
                                 Title = "SLOT MACHINE!",
@@ -388,6 +402,11 @@ namespace HayaseBot.commands
                         else
                         {
                             // Lost = amt input
+                            string rumCMD = "UPDATE UserBank Set Wallet = '"+lost+"' Where UserID = '"+cmdUser+"'";
+
+                            SqlCommand commnd = new SqlCommand(rumCMD, connection6);
+                            commnd.ExecuteNonQuery();
+
                             var embed1 = new DiscordEmbedBuilder
                             {
                                 Title = "SLOT MACHINE!",
