@@ -15,14 +15,12 @@ namespace HayaseBot.SlashCommand
         [SlashCommand("give", "Give a user money Command")]
         public async Task TestingCommand(InteractionContext ctx)
         {
-
-            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("Fetching embeded replies"));
             var embedMessage = new DiscordEmbedBuilder()
             {
                 Title = "Testing"
             };
 
-            await ctx.Channel.SendMessageAsync(embedMessage);
+            await ctx.CreateResponseAsync(embedMessage);
         }
     }
 }
