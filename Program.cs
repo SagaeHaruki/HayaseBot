@@ -1,21 +1,17 @@
-﻿using DSharpPlus; // Use Discord Sharp
+﻿using System;
+using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Entities;
-using DSharpPlus.VoiceNext;
 using HayaseBot.commands;
 using HayaseBot.config;
 using System.Threading.Tasks;
-using System;
-using System.Threading.Channels;
 using Microsoft.Extensions.Logging;
 using DSharpPlus.SlashCommands;
-using HayaseBot.slash_cmd;
-using System.Runtime.InteropServices.ComTypes;
-using HayaseBot.slash_cmd;
-using HayaseBot.commands;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.CommandsNext.Attributes;
+using Microsoft.Extensions.DependencyInjection;
+using HayaseBot.SlashCommand;
 
 namespace HayaseBot
 {
@@ -66,12 +62,21 @@ namespace HayaseBot
                 EnableDefaultHelp = true
             };
 
+            var services = new ServiceCollection()
+                .AddSingleton(config_Prefix)
+                .AddSingleton<SlashCommandsExtension>()
+                .BuildServiceProvider();
+
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
+            var SlashCommandsConfig = Client.UseSlashCommands();
 
             // Command Error
             Commands.CommandErrored += CommandHandler;
-            var SlashCommandsBld = Client.UseSlashCommands();
+
+
+            // Slash Commands Only
+            SlashCommandsConfig.RegisterCommands<SlashCMD>();
 
             // Normal Commands Only 
             Commands.RegisterCommands<BasicCommands>();
@@ -79,9 +84,6 @@ namespace HayaseBot
             Commands.RegisterCommands<GameCommands>();
             Commands.RegisterCommands<SearchCmd>();
             Commands.RegisterCommands<BankCommands>();
-
-            // Slash Commands Only
-            SlashCommandsBld.RegisterCommands<Hayase>();
 
             // Connect the Client
             await Client.ConnectAsync();
