@@ -4,11 +4,16 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Oct. 18, 2023]
+- Temporary Removal of slash commands (Until issue is solved)
+- Updating modules to latest versions
+- Updating Nuget packages to latest versions
+
+<h1>Past Changes</h1>
+
 - [Oct. 17, 2023]
 - Fix Slash Commands Not Working
 - Removed a Command that accidentally spam too much logs
-
-<h1>Past Changes</h1>
 
 - [Oct. 16, 2023]
 - Added Prizes to the slot machine command
