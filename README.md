@@ -4,12 +4,17 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Oct. 19, 2023]
+- Optimized give command
+- Added give to bank command
+- (Chris) Fix issues with the bot
+
+<h1>Past Changes</h1>
+
 - [Oct. 18, 2023]
 - Temporary Removal of slash commands (Until issue is solved)
 - Updating modules to latest versions
 - Updating Nuget packages to latest versions
-
-<h1>Past Changes</h1>
 
 - [Oct. 17, 2023]
 - Fix Slash Commands Not Working
