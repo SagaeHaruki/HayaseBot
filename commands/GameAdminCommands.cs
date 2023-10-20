@@ -1,4 +1,5 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
@@ -20,6 +21,7 @@ namespace HayaseBot.commands
          * Give but wallet version
          */
         [Command("give")]
+        [RequirePermissions(Permissions.Administrator)]
         public async Task TestingCommand(CommandContext ctx, DiscordMember target = null, int amt = 0)
         {
             Console.WriteLine(target);

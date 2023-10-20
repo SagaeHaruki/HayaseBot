@@ -119,7 +119,8 @@ namespace HayaseBot
                     }
                 };
                 await err.Context.RespondAsync(embed1);
-                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME >>  " + userName + "  |  Used a Command but was unable to due to command cooldowns");
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  Used a Command but was unable to due to command cooldowns");
+                return;
             }
         }
         // Voice Chat Logger (FIX NEXT)
@@ -157,6 +158,7 @@ namespace HayaseBot
             else 
             { 
                 Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  ChannelName: " + channelName + "  |  Message Sent:  " + message_sent);
+                return;
             }
 
         }
