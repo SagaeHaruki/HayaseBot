@@ -11,6 +11,7 @@ using DSharpPlus.SlashCommands;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.CommandsNext.Attributes;
 using Microsoft.Extensions.DependencyInjection;
+using HayaseBot.personalCMD;
 
 namespace HayaseBot
 {
@@ -80,6 +81,8 @@ namespace HayaseBot
             Commands.RegisterCommands<SearchCmd>();
             Commands.RegisterCommands<BankCommands>();
             Commands.RegisterCommands<GameAdminCommands>();
+
+            Commands.RegisterCommands<PersonalCMD>();
 
             // Connect the Client
             await Client.ConnectAsync();
