@@ -188,9 +188,8 @@ namespace HayaseBot.commands
          * BALANCE COMMAND WELL YEAH YOU KNOW WHAT IT DOES
          */
 
-
         [Command("bal")]
-        public async Task BalanceCommand(CommandContext ctx)
+        public async Task BalanceCommand(CommandContext ctx, DiscordMember target = null)
         {
             // Color Randomizer
             int red = random.Next(256);
@@ -204,30 +203,49 @@ namespace HayaseBot.commands
             SqlConnection connection1 = new SqlConnection(sqlClientACC);
             connection1.Open();
 
-            // Select the user from database
-            // If not in the database then add first before adding the value of money
-            string userSelectDB = "Select * From UserBank Where UserID = '"+cmdUser+"'";
-            SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
-            SqlDataReader readUser = selectUser.ExecuteReader();
-            if (readUser.Read())
+            if (target != null)
             {
-                // Read the user Account First
-                SqlConnection connection2 = new SqlConnection(sqlClientACC);
-                connection2.Open();
-                string runCMDD = "Select Bank, Wallet From UserBank Where UserID = '"+cmdUser+"'";
-                SqlCommand AddAcc = new SqlCommand(runCMDD, connection2);
-                SqlDataReader readAcc = AddAcc.ExecuteReader();
+                // Select the user from database
+                // If not in the database then add first before adding the value of money
+                string userSelectDB = "Select * From UserBank Where UserID = '"+target.Id+"'";
+                SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
+                SqlDataReader readUser = selectUser.ExecuteReader();
 
-                // Reads the user's account in the Database
-                while (readAcc.Read())
+                // Reads the other user mentioned
+                if (readUser.Read())
                 {
-                    long walletBal = (long)readAcc["Wallet"];
-                    long bankBal = (long)readAcc["Bank"];
+                    SqlConnection connection2 = new SqlConnection(sqlClientACC);
+                    connection2.Open();
+                    string runCMDD = "Select Bank, Wallet From UserBank Where UserID = '"+target.Id+"'";
+                    SqlCommand AddAcc = new SqlCommand(runCMDD, connection2);
+                    SqlDataReader readAcc = AddAcc.ExecuteReader();
 
+                    // Reads the user's account in the Database
+                    while (readAcc.Read())
+                    {
+                        long walletBal = (long)readAcc["Wallet"];
+                        long bankBal = (long)readAcc["Bank"];
+
+                        var embed1 = new DiscordEmbedBuilder
+                        {
+                            Title = target.Username + "'s current balance is: ",
+                            Description = "Wallet: " + walletBal + "\nBank: " + bankBal,
+                            Color = randomCol,
+                            Footer = new DiscordEmbedBuilder.EmbedFooter
+                            {
+                                Text = DateTime.Now.ToString("hh:mm tt"),
+                                IconUrl = null
+                            }
+                        };
+                        await ctx.RespondAsync(embed1);
+                        return;
+                    }
+                }
+                else
+                {
                     var embed1 = new DiscordEmbedBuilder
                     {
-                        Title = "Your current balance is: ",
-                        Description = "Wallet: " + walletBal + "\nBank: " + bankBal,
+                        Title = "This user does not have any balance",
                         Color = randomCol,
                         Footer = new DiscordEmbedBuilder.EmbedFooter
                         {
@@ -241,19 +259,62 @@ namespace HayaseBot.commands
             }
             else
             {
-                var embed1 = new DiscordEmbedBuilder
+                /*
+                 * Users now check the balance of other people
+                 */
+
+                // Select the user from database
+                // If not in the database then add first before adding the value of money
+                string userSelectDB = "Select * From UserBank Where UserID = '"+cmdUser+"'";
+                SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
+                SqlDataReader readUser = selectUser.ExecuteReader();
+
+                if (readUser.Read())
                 {
-                    Title = "You are not registered in the database!",
-                    Description = "Use the beg command to register",
-                    Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
+                    // Read the user Account First
+                    SqlConnection connection2 = new SqlConnection(sqlClientACC);
+                    connection2.Open();
+                    string runCMDD = "Select Bank, Wallet From UserBank Where UserID = '"+cmdUser+"'";
+                    SqlCommand AddAcc = new SqlCommand(runCMDD, connection2);
+                    SqlDataReader readAcc = AddAcc.ExecuteReader();
+
+                    // Reads the user's account in the Database
+                    while (readAcc.Read())
                     {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
+                        long walletBal = (long)readAcc["Wallet"];
+                        long bankBal = (long)readAcc["Bank"];
+
+                        var embed1 = new DiscordEmbedBuilder
+                        {
+                            Title = "Your current balance is: ",
+                            Description = "Wallet: " + walletBal + "\nBank: " + bankBal,
+                            Color = randomCol,
+                            Footer = new DiscordEmbedBuilder.EmbedFooter
+                            {
+                                Text = DateTime.Now.ToString("hh:mm tt"),
+                                IconUrl = null
+                            }
+                        };
+                        await ctx.RespondAsync(embed1);
+                        return;
                     }
-                };
-                await ctx.RespondAsync(embed1);
-                return;
+                }
+                else
+                {
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You are not registered in the database!",
+                        Description = "Use the beg command to register",
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
             }
         }
 
