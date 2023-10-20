@@ -8,6 +8,7 @@ Discord bot using C#
 - Balance can now be used to other users
 - Added Ban Command (Bro why only now?)
 - User message/command logger optimization (Bad arrangement was fixed here)
+- Windows Form inclusion, this will allow for customization (Under Development)
 
 <h1>Past Changes</h1>
 
