@@ -4,12 +4,17 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Oct. 20, 2023]
+- Balance can now be used to other users
+- Added Ban Command (Bro why only now?)
+- User message/command logger optimization (Bad arrangement was fixed here)
+
+<h1>Past Changes</h1>
+
 - [Oct. 19, 2023]
 - Optimized give command
 - Added give to bank command
 - (Chris) Fix issues with the bot
-
-<h1>Past Changes</h1>
 
 - [Oct. 18, 2023]
 - Temporary Removal of slash commands (Until issue is solved)
