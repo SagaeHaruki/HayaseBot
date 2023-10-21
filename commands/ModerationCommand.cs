@@ -258,6 +258,7 @@ namespace HayaseBot.commands
                     };
 
                     await ctx.RespondAsync(embed3);
+                    return
                 }
                 return;
             }
@@ -271,6 +272,7 @@ namespace HayaseBot.commands
                 };
 
                 await ctx.RespondAsync(embed3);
+                return
             }
         }
     }
