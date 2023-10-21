@@ -4,13 +4,18 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Oct. 21, 2023]
+- Temporary removal of Windows form inclusion (unable to be used)
+- Fix Embed (Shortening the code for cleaner look)
+- Command optimizations
+
+<h1>Past Changes</h1>
+
 - [Oct. 20, 2023]
 - Balance can now be used to other users
 - Added Ban Command (Bro why only now?)
 - User message/command logger optimization (Bad arrangement was fixed here)
 - Windows Form inclusion, this will allow for customization (Under Development)
-
-<h1>Past Changes</h1>
 
 - [Oct. 19, 2023]
 - Optimized give command
