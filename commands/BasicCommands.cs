@@ -1,4 +1,5 @@
-﻿using DSharpPlus.CommandsNext;
+﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
@@ -18,10 +19,10 @@ namespace HayaseBot.commands
     {
         private Random random = new Random();
 
-        // Ping Command
+        /*
+         * Simple ping command
+         */
         [Command("ping")]
-
-        // Run The Command
         public async Task PingCmd(CommandContext ctx)
         {
             int red = random.Next(256);
@@ -48,7 +49,9 @@ namespace HayaseBot.commands
             return;
         }
 
-        // Server Info Command
+        /*
+         * Bot info Command
+         */
         [Command("info")]
         public async Task ServerCmd(CommandContext ctx)
         {
@@ -69,6 +72,34 @@ namespace HayaseBot.commands
                 Color = randomCol,
             };
             await ctx.Channel.SendMessageAsync(embed: msg_toSend);
+        }
+
+        /*
+         * Server info commmand
+         */
+        [Command("serverinfo")]
+        public async Task ServerInfCMD(CommandContext ctx)
+        {
+            // Colors Embed
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            var guildID = ctx.Guild.Id;
+            var guildPhoto = ctx.Guild.IconUrl;
+            var guildName = ctx.Guild.Name;
+            var guildOwner = ctx.Guild.Owner.Username;
+
+            var msg_toSend = new DiscordEmbedBuilder
+            {
+                Title = "Server Info",
+                Color = randomCol,
+                Timestamp = DateTime.UtcNow,
+            };
+            msg_toSend.WithThumbnail(guildPhoto);
+            msg_toSend.AddField("Field1", "Field2", inline: true);
+            await ctx.RespondAsync(msg_toSend);
         }
     }
 }

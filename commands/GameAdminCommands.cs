@@ -40,11 +40,7 @@ namespace HayaseBot.commands
                 {
                     Title = "Please Specify a target User!",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embedMessage);
                 return;
@@ -58,11 +54,7 @@ namespace HayaseBot.commands
                 {
                     Title = "I'm a millionaire already i don't need that",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embedMessage);
                 return;
@@ -76,11 +68,7 @@ namespace HayaseBot.commands
                 {
                     Title = "Please enter a decent amount!",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embedMessage);
                 return;
@@ -128,11 +116,7 @@ namespace HayaseBot.commands
                         {
                             Title = "Given " + target.DisplayName + " user " + amt + " ",
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow
                         };
                         await ctx.RespondAsync(embedMessage);
                         connection6.Close();
@@ -150,11 +134,7 @@ namespace HayaseBot.commands
                     {
                         Title = "Cannot find user",
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow,
                     };
                     await ctx.RespondAsync(embedMessage);
                 }    

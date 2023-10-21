@@ -72,11 +72,7 @@ namespace HayaseBot.commands
                             Title = "You withdraw a total of: " + UserInput,
                             Description = "Your new Balance is: \nWallet: " + newWalletBal + "\nBank: " + newBankBal,
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow,
                         };
                         await ctx.RespondAsync(embed1);
                         connection6.Close();
@@ -91,11 +87,7 @@ namespace HayaseBot.commands
                         {
                             Title = "You don't have enough money in your Bank Account",
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow,
                         };
                         await ctx.RespondAsync(embed1);
                         connection6.Close();
@@ -110,11 +102,7 @@ namespace HayaseBot.commands
                     Title = "You are not registered in the database!",
                     Description = "Use the beg command to register",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow,
                 };
                 await ctx.RespondAsync(embed1);
                 return;
@@ -176,11 +164,7 @@ namespace HayaseBot.commands
                             Title = "You Deposit a total of: " + UserInput,
                             Description = "Your new Balance is: \nWallet: " + newWalletBal + "\nBank: " + newBankBal,
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow,
                         };
                         await ctx.RespondAsync(embed1);
                         connection6.Close();
@@ -195,11 +179,7 @@ namespace HayaseBot.commands
                         {
                             Title = "You don't have enough money in your Wallet",
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow,
                         };
                         await ctx.RespondAsync(embed1);
                         connection6.Close();
@@ -214,11 +194,7 @@ namespace HayaseBot.commands
                     Title = "You are not registered in the database!",
                     Description = "Use the beg command to register",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embed1);
                 return;

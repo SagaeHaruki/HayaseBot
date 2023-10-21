@@ -101,11 +101,7 @@ namespace HayaseBot.commands
                         {
                             Title = beggSel2,
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow
                         };
                         await ctx.RespondAsync(embed1);
                         return;
@@ -120,11 +116,7 @@ namespace HayaseBot.commands
                         {
                             Title = beggSel + coinRandom + " Coins",
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow
                         };
                         await ctx.RespondAsync(embed1);
                         connection6.Close();
@@ -170,11 +162,7 @@ namespace HayaseBot.commands
                         Title = "Your accout has been registered to the System!",
                         Description = "Bank: " + bankBal + "\nWallet: " + walletBal,
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow
                     };
                     await ctx.RespondAsync(embed1);
                 }
@@ -231,11 +219,7 @@ namespace HayaseBot.commands
                             Title = target.Username + "'s current balance is: ",
                             Description = "Wallet: " + walletBal + "\nBank: " + bankBal,
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow
                         };
                         await ctx.RespondAsync(embed1);
                         return;
@@ -247,11 +231,7 @@ namespace HayaseBot.commands
                     {
                         Title = "This user does not have any balance",
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow
                     };
                     await ctx.RespondAsync(embed1);
                     return;
@@ -289,11 +269,7 @@ namespace HayaseBot.commands
                             Title = "Your current balance is: ",
                             Description = "Wallet: " + walletBal + "\nBank: " + bankBal,
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow
                         };
                         await ctx.RespondAsync(embed1);
                         return;
@@ -306,11 +282,7 @@ namespace HayaseBot.commands
                         Title = "You are not registered in the database!",
                         Description = "Use the beg command to register",
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow
                     };
                     await ctx.RespondAsync(embed1);
                     return;
@@ -400,11 +372,7 @@ namespace HayaseBot.commands
                                 Title = "SLOT MACHINE!",
                                 Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
                                 Color = randomCol,
-                                Footer = new DiscordEmbedBuilder.EmbedFooter
-                                {
-                                    Text = DateTime.Now.ToString("hh:mm tt"),
-                                    IconUrl = null
-                                }
+                                Timestamp = DateTime.UtcNow
                             };
                             await ctx.RespondAsync(embed1);
                             return;
@@ -424,11 +392,7 @@ namespace HayaseBot.commands
                                 Title = "SLOT MACHINE!",
                                 Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
                                 Color = randomCol,
-                                Footer = new DiscordEmbedBuilder.EmbedFooter
-                                {
-                                    Text = DateTime.Now.ToString("hh:mm tt"),
-                                    IconUrl = null
-                                }
+                                Timestamp = DateTime.UtcNow
                             };
                             await ctx.RespondAsync(embed1);
                             return;
@@ -448,11 +412,7 @@ namespace HayaseBot.commands
                                 Title = "SLOT MACHINE!",
                                 Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYou win!",
                                 Color = randomCol,
-                                Footer = new DiscordEmbedBuilder.EmbedFooter
-                                {
-                                    Text = DateTime.Now.ToString("hh:mm tt"),
-                                    IconUrl = null
-                                }
+                                Timestamp = DateTime.UtcNow
                             };
                             await ctx.RespondAsync(embed1);
                             return;
@@ -473,11 +433,7 @@ namespace HayaseBot.commands
                                 Title = "SLOT MACHINE!",
                                 Description = rand1 + "  " + rand2 + "  " + rand3 + "\nYOU LOST!",
                                 Color = randomCol,
-                                Footer = new DiscordEmbedBuilder.EmbedFooter
-                                {
-                                    Text = DateTime.Now.ToString("hh:mm tt"),
-                                    IconUrl = null
-                                }
+                                Timestamp = DateTime.UtcNow
                             };
                             await ctx.RespondAsync(embed1);
                             return;
@@ -489,11 +445,7 @@ namespace HayaseBot.commands
                         {
                             Title = "You don't have enough balance",
                             Color = randomCol,
-                            Footer = new DiscordEmbedBuilder.EmbedFooter
-                            {
-                                Text = DateTime.Now.ToString("hh:mm tt"),
-                                IconUrl = null
-                            }
+                            Timestamp = DateTime.UtcNow
                         };
                         await ctx.RespondAsync(embed1);
                         connection6.Close();
@@ -541,11 +493,7 @@ namespace HayaseBot.commands
                         Title = "Your accout has been registered to the System!",
                         Description = "Bank: " + bankBal + "\nWallet: " + walletBal,
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow
                     };
                     await ctx.RespondAsync(embed1);
                 }

@@ -69,11 +69,7 @@ namespace HayaseBot.commands
                 {
                     Title = "You cannot kick Yourself!",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow,
                 };
                 await ctx.RespondAsync(embed1);
                 return;
@@ -87,11 +83,7 @@ namespace HayaseBot.commands
                 {
                     Title = "You cannot kick ME!",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embed1);
                 return;
@@ -107,11 +99,7 @@ namespace HayaseBot.commands
                 {
                     Title = "The User " + target.DisplayName + " is Kicked by " + ctx.User.Username + " from the Server! \nReason: " + reason,
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embed1);
                 return;
@@ -148,11 +136,7 @@ namespace HayaseBot.commands
                 {
                     Title = "You cannot ban this user with Administrator Permission!",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embed1);
                 return;
@@ -166,11 +150,7 @@ namespace HayaseBot.commands
                 {
                     Title = "You cannot ban Yourself!",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embed1);
                 return;
@@ -184,11 +164,7 @@ namespace HayaseBot.commands
                 {
                     Title = "You cannot ban ME!",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embed1);
                 return;
@@ -204,11 +180,7 @@ namespace HayaseBot.commands
                 {
                     Title = "The User " + target.DisplayName + " is banned by " + ctx.User.Username + " from the Server! \nReason: " + reason,
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embed1);
                 return;
@@ -244,11 +216,7 @@ namespace HayaseBot.commands
                     {
                         Title = "I don't have any permission to clear the chat",
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow
                     };
                     await ctx.RespondAsync(embed1);
                     return;
@@ -261,11 +229,7 @@ namespace HayaseBot.commands
                     {
                         Title = "Enter between 1 - 100 amount to be cleared!",
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow
                     };
 
                     await ctx.RespondAsync(embed3);
@@ -276,11 +240,7 @@ namespace HayaseBot.commands
                     {
                         Title = "I can only Clear 1 - 100 messages and no longer than 14 days",
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow
                     };
                     await ctx.RespondAsync(embed1);
                     return;
@@ -294,11 +254,7 @@ namespace HayaseBot.commands
                     {
                         Title = "Chat cleared by " + userCmd,
                         Color = randomCol,
-                        Footer = new DiscordEmbedBuilder.EmbedFooter
-                        {
-                            Text = DateTime.Now.ToString("hh:mm tt"),
-                            IconUrl = null
-                        }
+                        Timestamp = DateTime.UtcNow
                     };
 
                     await ctx.RespondAsync(embed3);
@@ -311,11 +267,7 @@ namespace HayaseBot.commands
                 {
                     Title = "Message is more than 14days old",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow
                 };
 
                 await ctx.RespondAsync(embed3);
