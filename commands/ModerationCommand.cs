@@ -224,7 +224,7 @@ namespace HayaseBot.commands
 
                 // Check if amt is between 1 or 100
                 if (amt == 0)
-                {             
+                {
                     var embed3 = new DiscordEmbedBuilder
                     {
                         Title = "Enter between 1 - 100 amount to be cleared!",
@@ -234,7 +234,7 @@ namespace HayaseBot.commands
 
                     await ctx.RespondAsync(embed3);
                 }
-                else if (amt < 1 || amt > 100) 
+                else if (amt < 1 || amt > 100)
                 {
                     var embed1 = new DiscordEmbedBuilder
                     {
@@ -258,7 +258,7 @@ namespace HayaseBot.commands
                     };
 
                     await ctx.RespondAsync(embed3);
-                    return
+                    return;
                 }
                 return;
             }
@@ -270,9 +270,8 @@ namespace HayaseBot.commands
                     Color = randomCol,
                     Timestamp = DateTime.UtcNow
                 };
-
                 await ctx.RespondAsync(embed3);
-                return
+                return;
             }
         }
     }
