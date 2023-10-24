@@ -4,12 +4,17 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Oct. 24, 2023]
+- Trying to fix Slash command issue
+- Code Optimizations
+- Nuget Package Optimizations
+  
+<h1>Past Changes</h1>
+
 - [Oct. 22, 2023]
 - Clear command optimization
 - Added pay command
 - Fix some issues with the token
-  
-<h1>Past Changes</h1>
 
 - [Oct. 21, 2023]
 - Temporary removal of Windows form inclusion (unable to be used)
