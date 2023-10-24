@@ -264,11 +264,9 @@ namespace HayaseBot.commands
             }
             else
             {
-
                 /*
                  * Run checks if user is in the database
                  */
-
                 SqlConnection connection1 = new SqlConnection(sqlClientACC);
                 connection1.Open();
                 string userSelectDB = "Select * From UserBank Where UserID = '"+cmdUser+"'";
@@ -344,7 +342,7 @@ namespace HayaseBot.commands
                             {
                                 var embed1 = new DiscordEmbedBuilder
                                 {
-                                    Title = "You are not in the Database!Target is not in the Database!",
+                                    Title = "Target is not in the Database!",
                                     Color = randomCol,
                                     Timestamp = DateTime.UtcNow
                                 };

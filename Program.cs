@@ -11,6 +11,9 @@ using DSharpPlus.SlashCommands;
 using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.CommandsNext.Attributes;
 using Microsoft.Extensions.DependencyInjection;
+using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.Interactivity;
+using HayaseBot.slashcommands;
 
 namespace HayaseBot
 {
@@ -60,12 +63,6 @@ namespace HayaseBot
                 EnableDms = true,
                 EnableDefaultHelp = true
             };
-
-            var services = new ServiceCollection()
-                .AddSingleton(config_Prefix)
-                .AddSingleton<SlashCommandsExtension>()
-                .BuildServiceProvider();
-
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
             var SlashCommandsConfig = Client.UseSlashCommands();
@@ -80,6 +77,8 @@ namespace HayaseBot
             Commands.RegisterCommands<SearchCmd>();
             Commands.RegisterCommands<BankCommands>();
             Commands.RegisterCommands<GameAdminCommands>();
+
+            SlashCommandsConfig.RegisterCommands<SlashCommand>();
 
             // Connect the Client
             await Client.ConnectAsync();
