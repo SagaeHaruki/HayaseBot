@@ -39,11 +39,7 @@ namespace HayaseBot.commands
                 Title = "Pong!!",
                 Description = "Current API Latency is: " + ping +"ms",
                 Color = randomCol,
-                Footer = new DiscordEmbedBuilder.EmbedFooter
-                {
-                    Text = DateTime.Now.ToString("hh:mm tt"),
-                    IconUrl = null
-                }
+                Timestamp = DateTime.UtcNow,
             };
             await ctx.RespondAsync(embed1);
             return;
@@ -61,17 +57,24 @@ namespace HayaseBot.commands
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            // Logger
             var userName = ctx.User.Username;
             var ServerOwner = ctx.Guild.Owner;
 
             var msg_toSend = new DiscordEmbedBuilder
             {
-                Title = "Server Info",
-                Description = "<Description Here>",
+                Title = "Bot Information",
+                Description = "Hello i'm hayase bot created by: hayase_haruki",
                 Color = randomCol,
+                Timestamp = DateTime.UtcNow,
             };
-            await ctx.Channel.SendMessageAsync(embed: msg_toSend);
+            msg_toSend.AddField("IDE", "Visual Code 2022", inline: true);
+            msg_toSend.AddField("Language", "C#", inline: true);
+            msg_toSend.AddField("Database", "MSSql", inline: true);
+            msg_toSend.AddField("Source Code", "Click [here](https://github.com/SagaeHaruki/HayaseBot)!", inline: true);
+            msg_toSend.AddField("Developer", "hayase_haurki", inline: true);
+            msg_toSend.AddField("Github", "My [Github](https://github.com/SagaeHaruki)", inline: true);
+            msg_toSend.WithFooter("This bot is from the winter wonderland!");
+            await ctx.RespondAsync(msg_toSend);
         }
 
         /*
@@ -80,53 +83,45 @@ namespace HayaseBot.commands
         [Command("serverinfo")]
         public async Task ServerInfCMD(CommandContext ctx)
         {
-            try
+            // Colors Embed
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            var guildID = ctx.Guild.Id;
+            var guildPhoto = ctx.Guild.IconUrl;
+            var guildName = ctx.Guild.Name;
+            var guildOwner = ctx.Guild.Owner.Username;
+            var guildCurrentMem = ctx.Guild.MemberCount;
+            var guildRoleCount = ctx.Guild.Roles.Count;
+            var guildTextChannels = ctx.Guild.Channels.Count;
+            var guildVoiceChannels = ctx.Guild.Channels;
+            int guildVoiceChanCount = guildVoiceChannels.Values.Count(c => c.Type == DSharpPlus.ChannelType.Voice);
+            int botCount = 0;
+            foreach (var member in ctx.Guild.Members)
             {
-
-                // Colors Embed
-                int red = random.Next(256);
-                int green = random.Next(256);
-                int blue = random.Next(256);
-                DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
-
-                var guildID = ctx.Guild.Id;
-                var guildPhoto = ctx.Guild.IconUrl;
-                var guildName = ctx.Guild.Name;
-                var guildOwner = ctx.Guild.Owner.Username;
-                var guildCurrentMem = ctx.Guild.MemberCount;
-                var guildRoleCount = ctx.Guild.Roles.Count;
-                var guildTextChannels = ctx.Guild.Channels.Count;
-                var guildVoiceChannels = ctx.Guild.Channels;
-                int guildVoiceChanCount = guildVoiceChannels.Values.Count(c => c.Type == DSharpPlus.ChannelType.Voice);
-                int botCount = 0;
-                foreach (var member in ctx.Guild.Members)
+                if (member.Value.IsBot)
                 {
-                    if (member.Value.IsBot)
-                    {
-                        botCount++;
-                    }
+                    botCount++;
                 }
+            }
 
-                var msg_toSend = new DiscordEmbedBuilder
-                {
-                    Title = "Server Info",
-                    Description = guildName,
-                    Color = randomCol,
-                    Timestamp = DateTime.UtcNow,
-                };
-                msg_toSend.WithThumbnail(guildPhoto);
-                msg_toSend.AddField("Owner", guildOwner, inline: true);
-                msg_toSend.AddField("Role Count", guildRoleCount.ToString(), inline: true);
-                msg_toSend.AddField("Member Count", guildCurrentMem.ToString(), inline: true);
-                msg_toSend.AddField("Text Channels", guildTextChannels.ToString(), inline: true);
-                msg_toSend.AddField("Voice Channels", guildVoiceChanCount.ToString(), inline: true);
-                msg_toSend.AddField("Bots", botCount.ToString(), inline: true);
-                await ctx.RespondAsync(msg_toSend);
-            }
-            catch (Exception ex)
+            var msg_toSend = new DiscordEmbedBuilder
             {
-                Console.WriteLine(ex.ToString());
-            }
+                Title = "Server Info",
+                Description = guildName,
+                Color = randomCol,
+                Timestamp = DateTime.UtcNow,
+            };
+            msg_toSend.WithThumbnail(guildPhoto);
+            msg_toSend.AddField("Owner", guildOwner, inline: true);
+            msg_toSend.AddField("Role Count", guildRoleCount.ToString(), inline: true);
+            msg_toSend.AddField("Member Count", guildCurrentMem.ToString(), inline: true);
+            msg_toSend.AddField("Text Channels", guildTextChannels.ToString(), inline: true);
+            msg_toSend.AddField("Voice Channels", guildVoiceChanCount.ToString(), inline: true);
+            msg_toSend.AddField("Bot Count", botCount.ToString(), inline: true);
+            await ctx.RespondAsync(msg_toSend);
         }
     }
 }
