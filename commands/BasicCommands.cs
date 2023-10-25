@@ -115,13 +115,81 @@ namespace HayaseBot.commands
                 Timestamp = DateTime.UtcNow,
             };
             msg_toSend.WithThumbnail(guildPhoto);
-            msg_toSend.AddField("Owner", guildOwner, inline: true);
-            msg_toSend.AddField("Role Count", guildRoleCount.ToString(), inline: true);
-            msg_toSend.AddField("Member Count", guildCurrentMem.ToString(), inline: true);
-            msg_toSend.AddField("Text Channels", guildTextChannels.ToString(), inline: true);
-            msg_toSend.AddField("Voice Channels", guildVoiceChanCount.ToString(), inline: true);
-            msg_toSend.AddField("Bot Count", botCount.ToString(), inline: true);
+            msg_toSend.AddField("Owner:", guildOwner, inline: true);
+            msg_toSend.AddField("Role Count:", guildRoleCount.ToString(), inline: true);
+            msg_toSend.AddField("Member Count:", guildCurrentMem.ToString(), inline: true);
+            msg_toSend.AddField("Text Channels:", guildTextChannels.ToString(), inline: true);
+            msg_toSend.AddField("Voice Channels:", guildVoiceChanCount.ToString(), inline: true);
+            msg_toSend.AddField("Bot Count:", botCount.ToString(), inline: true);
             await ctx.RespondAsync(msg_toSend);
+        }
+
+        /*
+         * User Profile Command
+         */
+
+        [Command("profile")]
+        public async Task ProfileCommand(CommandContext ctx, [RemainingText] DiscordMember target = null)
+        {
+            // Colors Embed
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+
+            // User Info
+            var userPhoto = ctx.User.AvatarUrl;
+            var userName = ctx.User.Username;
+            var userJoin = ctx.Member.JoinedAt;
+            UserStatus userPresence = ctx.Member.Presence?.Status ?? UserStatus.Offline;
+            var userId = ctx.User.Id;
+            var userBot = ctx.User.IsBot;
+
+            // If user didn't specify a target
+            if (target == null)
+            {
+                var msg_toSend = new DiscordEmbedBuilder
+                {
+                    Title = "Profile Checker",
+                    Description = "Username: " + userName,
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow,
+                };
+                msg_toSend.WithThumbnail(userPhoto);
+                msg_toSend.AddField("Server Join Date:", userJoin.ToString("dd/mm/yyyy"), inline: true);
+                msg_toSend.AddField("Current activity:", userPresence.ToString(), inline: true);
+                msg_toSend.AddField("User ID:", userId.ToString(), inline: true);
+                msg_toSend.AddField("Is a Bot:", userBot.ToString(), inline: true);
+                await ctx.RespondAsync(msg_toSend);
+                return;
+            }
+            // If the user didn't specify a target
+            else if (target != null)
+            {
+                // Target Info
+                var targetPhoto = target.AvatarUrl;
+                var targetName = target.Username;
+                var targetJoin = target.JoinedAt;
+                UserStatus targetPresence = target.Presence?.Status ?? UserStatus.Offline;
+                var targetId = target.Id;
+                var targetBot = target.IsBot;
+
+                var msg_toSend = new DiscordEmbedBuilder
+                {
+                    Title = "Profile Checker",
+                    Description = "Username: " + targetName,
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow,
+                };
+                msg_toSend.WithThumbnail(targetPhoto);
+                msg_toSend.AddField("Server Join Date:", targetJoin.ToString("dd/mm/yyyy"), inline: true);
+                msg_toSend.AddField("Current activity:", targetPresence.ToString(), inline: true);
+                msg_toSend.AddField("User ID:", targetId.ToString(), inline: true);
+                msg_toSend.AddField("Is a Bot:", targetBot.ToString(), inline: true);
+                await ctx.RespondAsync(msg_toSend);
+                return;
+            }
         }
     }
 }
