@@ -22,6 +22,7 @@ namespace HayaseBot.commands
         /*
          * Simple ping command
          */
+
         [Command("ping")]
         public async Task PingCmd(CommandContext ctx)
         {

@@ -294,6 +294,7 @@ namespace HayaseBot.commands
          * Slot Machine Command
          */
         [Command("slotmachine")]
+        [Cooldown(1, 5, CooldownBucketType.User)]
         public async Task SlotMachineCMD(CommandContext ctx)
         {
             // Color Randomizer
@@ -305,7 +306,6 @@ namespace HayaseBot.commands
             var cmdUser = ctx.User.Id;
 
             // Slot machine randomizer
-
             string[] items = { "💸", "🍉", "❌", "🍋 ", "♥️", "🍒" };
             int randomIndex1 = random.Next(items.Length);
             int randomIndex2 = random.Next(items.Length);
@@ -320,7 +320,6 @@ namespace HayaseBot.commands
              * Prices will differ, but more likely to lose the bet.
              */
 
-
             // SQL CONNECT
             SqlConnection connection1 = new SqlConnection(sqlClientACC);
             connection1.Open();
@@ -330,7 +329,6 @@ namespace HayaseBot.commands
             string userSelectDB = "Select * From UserBank Where UserID = '"+cmdUser+"'";
             SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
             SqlDataReader readUser = selectUser.ExecuteReader();
-
 
             // Read User Start here
             if (readUser.Read())
@@ -499,6 +497,45 @@ namespace HayaseBot.commands
                 }
                 connection4.Close();
                 connection1.Close();
+                return;
+            }
+        }
+
+        /*
+         * Roll Command
+         */
+
+        [Command("roll")]
+        public async Task RollCommand(CommandContext ctx, [RemainingText] int amt = 100)
+        {
+            // Color Randomizer
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            int dice = random.Next(amt);
+
+            if (amt == 100)
+            {
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "You rolled the dice and got: " + dice,
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow
+                };
+                await ctx.RespondAsync(embed1);
+                return;
+            }
+            else
+            {
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "You rolled with the amount of: " + amt + " and got: " + dice,
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow
+                };
+                await ctx.RespondAsync(embed1);
                 return;
             }
         }
