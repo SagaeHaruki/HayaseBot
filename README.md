@@ -4,14 +4,19 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Oct. 26, 2023]
+- Database Optimizations
+- Added Roll Command
+- Fixed some bug related to slash commands
+  
+<h1>Past Changes</h1>
+
 - [Oct. 25, 2023]
 - Added new Profile Command
 - Fix Server Info Command
 - Fix Bot Info Command
 - Updated Nuget Packages
 - Optimizations
-  
-<h1>Past Changes</h1>
 
 - [Oct. 24, 2023]
 - Trying to fix Slash command issue
