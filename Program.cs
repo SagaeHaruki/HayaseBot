@@ -77,6 +77,7 @@ namespace HayaseBot
             Commands.RegisterCommands<SearchCmd>();
             Commands.RegisterCommands<BankCommands>();
             Commands.RegisterCommands<GameAdminCommands>();
+            Commands.RegisterCommands<WelcomerCommands>();
 
             SlashCommandsConfig.RegisterCommands<SlashCommand>();
 

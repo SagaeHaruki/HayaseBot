@@ -175,6 +175,7 @@
     <Compile Include="commands\BasicCommands.cs" />
     <Compile Include="commands\ModerationCommand.cs" />
     <Compile Include="commands\SearchCmd.cs" />
+    <Compile Include="commands\WelcomerCommands.cs" />
     <Compile Include="config\caster_reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
