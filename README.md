@@ -4,12 +4,17 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Oct. 27, 2023]
+- Fixed some issue discovered with the commands
+- Added Greetings Command
+- Fix Command Cooldowns
+  
+<h1>Past Changes</h1>
+
 - [Oct. 26, 2023]
 - Database Optimizations
 - Added Roll Command
 - Fixed some bug related to slash commands
-  
-<h1>Past Changes</h1>
 
 - [Oct. 25, 2023]
 - Added new Profile Command
