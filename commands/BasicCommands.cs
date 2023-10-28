@@ -192,5 +192,44 @@ namespace HayaseBot.commands
                 return;
             }
         }
+
+        [Command("seephoto")]
+        public async Task SeePhotoCommand(CommandContext ctx, [RemainingText] DiscordMember target = null)
+        {
+            // Colors Embed
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            // If there's no target specified
+            if (target == null)
+            {
+                var msg_toSend = new DiscordEmbedBuilder
+                {
+                    Title = "Please mention a target user!",
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow,
+                };
+                await ctx.RespondAsync(msg_toSend);
+                return;
+            }
+            else if (target != null)
+            {
+                // Target Profile image
+                var targetImage = target.AvatarUrl;
+                var targetName = target.Username;
+
+                var msg_toSend = new DiscordEmbedBuilder
+                {
+                    Title = targetName + "'s Avatar Photo",
+                    ImageUrl = targetImage,
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow,
+                };
+                await ctx.RespondAsync(msg_toSend);
+                return;
+            }
+        }
     }
 }
