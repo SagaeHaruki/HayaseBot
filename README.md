@@ -5,11 +5,16 @@ Discord bot using C#
 <h1>Today's Changes</h1>
 
 - [Oct. 27, 2023]
+- Added avatar checker command
+- Fix Database issue
+- Updates to the Nuget Packages
+  
+<h1>Past Changes</h1>
+
+- [Oct. 27, 2023]
 - Fixed some issue discovered with the commands
 - Added Greetings Command
 - Fix Command Cooldowns
-  
-<h1>Past Changes</h1>
 
 - [Oct. 26, 2023]
 - Database Optimizations
