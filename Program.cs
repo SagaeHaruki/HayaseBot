@@ -43,10 +43,15 @@ namespace HayaseBot
                 LoggerFactory = loggerFactory
             };
 
+            var services = new ServiceCollection()
+            .AddSingleton<InteractivityExtension>()
+            .BuildServiceProvider();
+
             // Ready Client to Start
             /* !!! IMPORTANT READY MUST BE FIRST OR THE CLIENT WILL NOT RUN !!!*/
             Client = new DiscordClient(config_Haruki);
             Client.Ready += Client_Ready;
+            Client.ComponentInteractionCreated += ButtonPressResponse;
 
 
             // Event Handler
@@ -81,9 +86,21 @@ namespace HayaseBot
 
             SlashCommandsConfig.RegisterCommands<SlashCommand>();
 
+            // Interactivity
+
+            var interactivity = Client.UseInteractivity(new InteractivityConfiguration
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            });
+
             // Connect the Client
             await Client.ConnectAsync();
             await Task.Delay(-1);
+        }
+
+        private static Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs args)
+        {
+            throw new NotImplementedException();
         }
 
         // Command Cooldown Cat

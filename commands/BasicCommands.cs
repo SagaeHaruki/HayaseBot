@@ -2,6 +2,7 @@
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.EventArgs;
 using DSharpPlus.VoiceNext;
 using System;
@@ -239,16 +240,25 @@ namespace HayaseBot.commands
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            var msg_toSend = new DiscordEmbedBuilder
+            DiscordButtonComponent button1 = new DiscordButtonComponent(ButtonStyle.Success, "Next_1", "Click Me!");
+
+            var message = new DiscordMessageBuilder
             {
-                Title = "Haruki Bot Commands!",
-                Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
-                Color = randomCol,
-                Timestamp = DateTime.UtcNow,
+                Content = "Help Command!",
+                Embed = new DiscordEmbedBuilder
+                {
+                    Title = "Haruki Bot Commands!",
+                    Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow,
+                }
+                .AddField("**Help Command**", "Moderation", inline: false)
+                .AddField(">kick <@username>", "Kick a member from the server", inline: false)
+                .AddField(">ban <@username>", "Ban a member from the server", inline: false)
+                .AddField(">bank <@username>", "Ban a member from the server", inline: false)
             };
-            msg_toSend.AddField(">kick <@username>", "Kick a member from the server", inline: false);
-            msg_toSend.AddField(">bank <@username>", "Ban a member from the server", inline: false);
-            await ctx.RespondAsync(msg_toSend);
+            message.AddComponents(button1);
+            await ctx.RespondAsync(message);
             return;
         }
     }
