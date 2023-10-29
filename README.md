@@ -7,6 +7,7 @@ Discord bot using C#
 - [Oct. 29, 2023]
 - Removed Default Help Command (Yeah you can have a default help command with DSharp+)
 - Added a Custom Help Command
+- Implemented buttons
 - Fixed the Command Handler
   
 <h1>Past Changes</h1>
