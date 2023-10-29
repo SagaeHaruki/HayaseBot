@@ -4,12 +4,17 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
-- [Oct. 27, 2023]
+- [Oct. 29, 2023]
+- Removed Default Help Command (Yeah you can have a default help command with DSharp+)
+- Added a Custom Help Command
+- Fixed the Command Handler
+  
+<h1>Past Changes</h1>
+
+- [Oct. 28, 2023]
 - Added avatar checker command
 - Fix Database issue
 - Updates to the Nuget Packages
-  
-<h1>Past Changes</h1>
 
 - [Oct. 27, 2023]
 - Fixed some issue discovered with the commands
