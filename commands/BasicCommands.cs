@@ -45,7 +45,6 @@ namespace HayaseBot.commands
             await ctx.RespondAsync(embed1);
             return;
         }
-
         /*
          * Bot info Command
          */
@@ -230,6 +229,27 @@ namespace HayaseBot.commands
                 await ctx.RespondAsync(msg_toSend);
                 return;
             }
+        }
+        [Command("help")]
+        public async Task HelpCommand(CommandContext ctx)
+        {
+            // Colors Embed
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            var msg_toSend = new DiscordEmbedBuilder
+            {
+                Title = "Haruki Bot Commands!",
+                Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
+                Color = randomCol,
+                Timestamp = DateTime.UtcNow,
+            };
+            msg_toSend.AddField(">kick <@username>", "Kick a member from the server", inline: false);
+            msg_toSend.AddField(">bank <@username>", "Ban a member from the server", inline: false);
+            await ctx.RespondAsync(msg_toSend);
+            return;
         }
     }
 }

@@ -61,7 +61,7 @@ namespace HayaseBot
                 StringPrefixes = new string[] { caster_haruki.prefix },
                 EnableMentionPrefix = true,
                 EnableDms = true,
-                EnableDefaultHelp = true
+                EnableDefaultHelp = false
             };
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
