@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.Interactivity;
 using HayaseBot.slashcommands;
+using System.Linq;
 
 namespace HayaseBot
 {
@@ -98,9 +99,17 @@ namespace HayaseBot
             await Task.Delay(-1);
         }
 
-        private static Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs args)
+        private static async Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs cice)
         {
-            throw new NotImplementedException();
+            var channel = cice.Interaction.Channel;
+
+            var lastMessage = (await channel.GetMessagesAsync(1)).LastOrDefault();
+
+            if (cice.Interaction.Data.CustomId == "custom_id1")
+            {
+                await lastMessage.DeleteAsync();
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent("Content here"));
+            }
         }
 
         // Command Cooldown Cat

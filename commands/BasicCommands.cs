@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using DSharpPlus.Interactivity;
 
 namespace HayaseBot.commands
 {
@@ -231,6 +232,11 @@ namespace HayaseBot.commands
                 return;
             }
         }
+
+        /*
+         * Custom Help Command instead of the default Command
+         */
+
         [Command("help")]
         public async Task HelpCommand(CommandContext ctx)
         {
@@ -240,24 +246,24 @@ namespace HayaseBot.commands
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            DiscordButtonComponent button1 = new DiscordButtonComponent(ButtonStyle.Success, "Next_1", "Click Me!");
+            var button1 = new DiscordButtonComponent(ButtonStyle.Primary, "custom_id1", "Click Me!");
 
-            var message = new DiscordMessageBuilder
+            var embeder = new DiscordEmbedBuilder
             {
-                Content = "Help Command!",
-                Embed = new DiscordEmbedBuilder
-                {
-                    Title = "Haruki Bot Commands!",
-                    Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
-                    Color = randomCol,
-                    Timestamp = DateTime.UtcNow,
-                }
+                Title = "Haruki Bot Commands!",
+                Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
+                Color = randomCol,
+                Timestamp = DateTime.UtcNow,
+            }
                 .AddField("**Help Command**", "Moderation", inline: false)
                 .AddField(">kick <@username>", "Kick a member from the server", inline: false)
                 .AddField(">ban <@username>", "Ban a member from the server", inline: false)
-                .AddField(">bank <@username>", "Ban a member from the server", inline: false)
-            };
-            message.AddComponents(button1);
+                .AddField(">bank <@username>", "Ban a member from the server", inline: false);
+
+            var message = new DiscordMessageBuilder()
+                .WithEmbed(embeder)
+                .AddComponents(button1);
+
             await ctx.RespondAsync(message);
             return;
         }
