@@ -116,40 +116,48 @@ namespace HayaseBot
             if (cice.Interaction.Data.CustomId == "custom_id1")
             {
                 // Embed Message
+                // Page 2 of the Commands
                 var embeder = new DiscordEmbedBuilder
                 {
-                    Title = "Haruki Bot Commands!2",
+                    Title = "Haruki Bot Commands!",
                     Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
                     Color = randomCol,
                     Timestamp = DateTime.UtcNow,
                 }
-                .AddField("**Help Command**", "Moderation", inline: false)
-                .AddField(">kick <@username>", "Kick a member from the server", inline: false)
-                .AddField(">ban <@username>", "Ban a member from the server", inline: false)
-                .AddField(">bank <@username>", "Ban a member from the server", inline: false);
+                .AddField("**Help Command**", "Game Commands", inline: false)
+                .AddField(">beg ", "Beg for Money", inline: false)
+                .AddField(">bal <@username> **OR**\n>bal", "Check your balance or others balance", inline: false)
+                .AddField(">slotmachine", "Use the slotmachine (-1000) coins", inline: false)
+                .AddField(">roll <amount>", "Roll the dice", inline: false);
 
                 var message = new DiscordMessageBuilder()
                     .WithEmbed(embeder)
                     .AddComponents(button1);
 
-                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(button1, button2));
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(button2));
+                return;
             }
             else if (cice.Interaction.Data.CustomId == "custom_id2")
             {
+                // First Page (The Moderation Command)
                 var embeder = new DiscordEmbedBuilder
                 {
-                    Title = "Previous",
+                    Title = "Haruki Bot Commands!",
                     Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
                     Color = randomCol,
                     Timestamp = DateTime.UtcNow,
-                };
+                }
+                    .AddField("**Help Command**", "Moderation", inline: false)
+                    .AddField(">kick <@username>", "Kick a member from the server", inline: false)
+                    .AddField(">ban <@username>", "Ban a member from the server", inline: false)
+                    .AddField(">bank <@username>", "Ban a member from the server", inline: false);
 
                 var message = new DiscordMessageBuilder()
                     .WithEmbed(embeder)
                     .AddComponents(button1);
 
-                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(button1, button2));
-
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(button1));
+                return;
             }
         }
 
