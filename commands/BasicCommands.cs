@@ -28,6 +28,7 @@ namespace HayaseBot.commands
         [Command("ping")]
         public async Task PingCmd(CommandContext ctx)
         {
+            // Color Randomizer
             int red = random.Next(256);
             int green = random.Next(256);
             int blue = random.Next(256);
@@ -53,7 +54,7 @@ namespace HayaseBot.commands
         [Command("info")]
         public async Task ServerCmd(CommandContext ctx)
         {
-            // Colors Embed
+            // Colors Randomizer
             int red = random.Next(256);
             int green = random.Next(256);
             int blue = random.Next(256);
@@ -246,7 +247,7 @@ namespace HayaseBot.commands
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            var button1 = new DiscordButtonComponent(ButtonStyle.Primary, "custom_id1", "Click Me!");
+            var button1 = new DiscordButtonComponent(ButtonStyle.Primary, "custom_id1", "Next");
 
             var embeder = new DiscordEmbedBuilder
             {
