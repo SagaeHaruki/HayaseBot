@@ -108,12 +108,20 @@ namespace HayaseBot
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            var button1 = new DiscordButtonComponent(ButtonStyle.Primary, "custom_id1", "Next");
-            var button2 = new DiscordButtonComponent(ButtonStyle.Primary, "custom_id2", "Previous");
 
-            // If user Selected the Next
+            var GameCommands = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands2", "Next"); 
+            var GameCommands2 = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands", "Previous"); 
 
-            if (cice.Interaction.Data.CustomId == "custom_id1")
+            var GameCommands3 = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands3", "Next");
+            var GameCommands4 = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands2", "Previous");
+
+            var ModCommands = new DiscordButtonComponent(ButtonStyle.Success, "Moderation", "Previous");
+
+            /*
+             * Game Commands Page
+             */
+
+            if (cice.Interaction.Data.CustomId == "GameCommands")
             {
                 // Embed Message
                 // Page 2 of the Commands
@@ -124,22 +132,22 @@ namespace HayaseBot
                     Color = randomCol,
                     Timestamp = DateTime.UtcNow,
                 }
-                .AddField("**Help Command**", "Game Commands", inline: false)
+                .AddField("**Help Command**", "*Page 2*", inline: false)
                 .AddField(">beg ", "Beg for Money", inline: false)
-                .AddField(">bal <@username> **OR**\n>bal", "Check your balance or others balance", inline: false)
+                .AddField(">bal <@username>", "Check your balance or others balance", inline: false)
                 .AddField(">slotmachine", "Use the slotmachine (-1000) coins", inline: false)
                 .AddField(">roll <amount>", "Roll the dice", inline: false);
 
-                var message = new DiscordMessageBuilder()
-                    .WithEmbed(embeder)
-                    .AddComponents(button1);
-
-                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(button2));
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(ModCommands, GameCommands));
                 return;
             }
-            else if (cice.Interaction.Data.CustomId == "custom_id2")
+
+            /*
+             * Game Commands2 Command Page
+             */
+
+            if (cice.Interaction.Data.CustomId == "GameCommands2")
             {
-                // First Page (The Moderation Command)
                 var embeder = new DiscordEmbedBuilder
                 {
                     Title = "Haruki Bot Commands!",
@@ -147,18 +155,64 @@ namespace HayaseBot
                     Color = randomCol,
                     Timestamp = DateTime.UtcNow,
                 }
-                    .AddField("**Help Command**", "Moderation", inline: false)
-                    .AddField(">kick <@username>", "Kick a member from the server", inline: false)
-                    .AddField(">ban <@username>", "Ban a member from the server", inline: false)
-                    .AddField(">bank <@username>", "Ban a member from the server", inline: false);
+                .AddField("**Help Command**", "*Page 3*", inline: false)
+                .AddField(">search <place>", "Search a place to get some money", inline: false)
+                .AddField(">searchlist", "List of the places to search", inline: false)
+                .AddField(">withdraw <amount>", "Withdraw money from the bank", inline: false)
+                .AddField(">deposit <amount>", "Deposit money to the bank", inline: false);
 
-                var message = new DiscordMessageBuilder()
-                    .WithEmbed(embeder)
-                    .AddComponents(button1);
-
-                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(button1));
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(GameCommands2, GameCommands3));
                 return;
             }
+
+            /*
+             * Game Commands3
+             */
+
+            if (cice.Interaction.Data.CustomId == "GameCommands3")
+            {
+                var embeder = new DiscordEmbedBuilder
+                {
+                    Title = "Haruki Bot Commands!",
+                    Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow,
+                }
+                .AddField("**Help Command**", "*Page 4*", inline: false)
+                .AddField(">search <place>", "Search a place to get some money", inline: false)
+                .AddField(">searchlist", "List of the places to search", inline: false)
+                .AddField(">withdraw <amount>", "Withdraw money from the bank", inline: false)
+                .AddField(">deposit <amount>", "Deposit money to the bank", inline: false);
+
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(GameCommands4));
+                return;
+            }
+
+            /*
+             * Moderation Command Page
+             */
+
+            if (cice.Interaction.Data.CustomId == "Moderation")
+            {
+                var embeder = new DiscordEmbedBuilder
+                {
+                    Title = "Haruki Bot Commands!",
+                    Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow,
+                }
+                .AddField("**Help Command**", "*Page 1*", inline: false)
+                .AddField(">kick <@username>", "Kick a member from the server", inline: false)
+                .AddField(">ban <@username>", "Ban a member from the server", inline: false)
+                .AddField(">clear <amount>", "Clear a channel (Max 100) Cannot clear messages more than 14 days", inline: false)
+                .AddField(">timeout", "(Coming Soon)", inline: false);
+                
+
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(GameCommands2));
+                return;
+            }
+
+
         }
 
         // Command Cooldown Cat

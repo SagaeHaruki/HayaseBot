@@ -247,7 +247,7 @@ namespace HayaseBot.commands
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            var button1 = new DiscordButtonComponent(ButtonStyle.Primary, "custom_id1", "Next");
+            var button1 = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands", "Next");
 
             var embeder = new DiscordEmbedBuilder
             {
@@ -256,10 +256,11 @@ namespace HayaseBot.commands
                 Color = randomCol,
                 Timestamp = DateTime.UtcNow,
             }
-                .AddField("**Help Command**", "Moderation", inline: false)
+                .AddField("**Help Command**", "*Page 1*", inline: false)
                 .AddField(">kick <@username>", "Kick a member from the server", inline: false)
                 .AddField(">ban <@username>", "Ban a member from the server", inline: false)
-                .AddField(">bank <@username>", "Ban a member from the server", inline: false);
+                .AddField(">clear <amount>", "Clear a channel (Max 100) Cannot clear messages more than 14 days", inline: false)
+                .AddField(">timeout", "(Coming Soon)", inline: false);
 
             var message = new DiscordMessageBuilder()
                 .WithEmbed(embeder)
