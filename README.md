@@ -8,6 +8,7 @@ Discord bot using C#
 - Slash Command Configuration (BETA - to see if slash command will work)
 - Command Buttons (Some command will have a button function)
 - Fix Help Button on (Program.cs)
+- Added Help in Slash Command
   
 <h1>Past Changes</h1>
 
