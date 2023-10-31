@@ -52,7 +52,7 @@ namespace HayaseBot
             /* !!! IMPORTANT READY MUST BE FIRST OR THE CLIENT WILL NOT RUN !!!*/
             Client = new DiscordClient(config_Haruki);
             Client.Ready += Client_Ready;
-            Client.ComponentInteractionCreated += ButtonPressResponse;
+            Client.ComponentInteractionCreated += HelpComamndButton;
 
 
             // Event Handler
@@ -99,7 +99,7 @@ namespace HayaseBot
             await Task.Delay(-1);
         }
 
-        private static async Task ButtonPressResponse(DiscordClient sender, ComponentInteractionCreateEventArgs cice)
+        private static async Task HelpComamndButton(DiscordClient sender, ComponentInteractionCreateEventArgs cice)
         {
             Random random = new Random();
             // Colors Embed
