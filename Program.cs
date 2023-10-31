@@ -108,20 +108,51 @@ namespace HayaseBot
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
+            // Button For Page 1
+            var Page1_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page2", ">>"); 
+            var Page1_Btn2 = new DiscordButtonComponent(ButtonStyle.Success, "Page1", "<<"); 
 
-            var GameCommands = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands2", "Next"); 
-            var GameCommands2 = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands", "Previous"); 
+            // Button For Page 2
+            var Page2_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page3", ">>");
+            var Page2_Btn2 = new DiscordButtonComponent(ButtonStyle.Success, "Page1", "<<");
 
-            var GameCommands3 = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands3", "Next");
-            var GameCommands4 = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands2", "Previous");
+            // Button For Page 3
+            var Page3_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page4", ">>");
+            var Page3_Btn2 = new DiscordButtonComponent(ButtonStyle.Success, "Page2", "<<");
 
-            var ModCommands = new DiscordButtonComponent(ButtonStyle.Success, "Moderation", "Previous");
+            // Button For Page 4
+            var Page4_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page5", ">>");
+            var Page4_Btn2 = new DiscordButtonComponent(ButtonStyle.Success, "Page3", "<<");
 
             /*
-             * Game Commands Page
+             * Page 1 Help Command
              */
 
-            if (cice.Interaction.Data.CustomId == "GameCommands")
+            if (cice.Interaction.Data.CustomId == "Page1")
+            {
+                var embeder = new DiscordEmbedBuilder
+                {
+                    Title = "Haruki Bot Commands!",
+                    Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow,
+                }
+                .AddField("**Help Command**", "*Page 1*", inline: false)
+                .AddField(">kick <@username>", "Kick a member from the server", inline: false)
+                .AddField(">ban <@username>", "Ban a member from the server", inline: false)
+                .AddField(">clear <amount>", "Clear a channel (Max 100) Cannot clear messages more than 14 days", inline: false)
+                .AddField(">timeout", "(Coming Soon)", inline: false);
+
+
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(Page1_Btn2, Page1_Btn));
+                return;
+            }
+
+            /*
+             * Page 2 Help Command
+             */
+
+            if (cice.Interaction.Data.CustomId == "Page2")
             {
                 // Embed Message
                 // Page 2 of the Commands
@@ -138,15 +169,15 @@ namespace HayaseBot
                 .AddField(">slotmachine", "Use the slotmachine (-1000) coins", inline: false)
                 .AddField(">roll <amount>", "Roll the dice", inline: false);
 
-                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(ModCommands, GameCommands));
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(Page2_Btn2, Page2_Btn));
                 return;
             }
 
             /*
-             * Game Commands2 Command Page
+             * Page 3 Help Command
              */
 
-            if (cice.Interaction.Data.CustomId == "GameCommands2")
+            if (cice.Interaction.Data.CustomId == "Page3")
             {
                 var embeder = new DiscordEmbedBuilder
                 {
@@ -161,15 +192,15 @@ namespace HayaseBot
                 .AddField(">withdraw <amount>", "Withdraw money from the bank", inline: false)
                 .AddField(">deposit <amount>", "Deposit money to the bank", inline: false);
 
-                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(GameCommands2, GameCommands3));
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(Page3_Btn2, Page3_Btn));
                 return;
             }
 
             /*
-             * Game Commands3
+             * Page 4 Gelp Command
              */
 
-            if (cice.Interaction.Data.CustomId == "GameCommands3")
+            if (cice.Interaction.Data.CustomId == "Page4")
             {
                 var embeder = new DiscordEmbedBuilder
                 {
@@ -179,38 +210,16 @@ namespace HayaseBot
                     Timestamp = DateTime.UtcNow,
                 }
                 .AddField("**Help Command**", "*Page 4*", inline: false)
-                .AddField(">search <place>", "Search a place to get some money", inline: false)
-                .AddField(">searchlist", "List of the places to search", inline: false)
-                .AddField(">withdraw <amount>", "Withdraw money from the bank", inline: false)
-                .AddField(">deposit <amount>", "Deposit money to the bank", inline: false);
+                .AddField(">ping", "API Latency", inline: false)
+                .AddField(">info", "Show bot information", inline: false)
+                .AddField(">serverinfo", "Show Server information", inline: false)
+                .AddField(">profile <@username>", "Show someone's username", inline: false);
 
-                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(GameCommands4));
+                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(Page4_Btn2));
                 return;
             }
 
-            /*
-             * Moderation Command Page
-             */
-
-            if (cice.Interaction.Data.CustomId == "Moderation")
-            {
-                var embeder = new DiscordEmbedBuilder
-                {
-                    Title = "Haruki Bot Commands!",
-                    Description = "***Bot Source!***\n[Developer](https://github.com/SagaeHaruki) Developer Github \n[Github](https://github.com/SagaeHaruki/HayaseBot) Source Code\n***Bot Help Commands***",
-                    Color = randomCol,
-                    Timestamp = DateTime.UtcNow,
-                }
-                .AddField("**Help Command**", "*Page 1*", inline: false)
-                .AddField(">kick <@username>", "Kick a member from the server", inline: false)
-                .AddField(">ban <@username>", "Ban a member from the server", inline: false)
-                .AddField(">clear <amount>", "Clear a channel (Max 100) Cannot clear messages more than 14 days", inline: false)
-                .AddField(">timeout", "(Coming Soon)", inline: false);
-                
-
-                await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(GameCommands2));
-                return;
-            }
+            
 
 
         }

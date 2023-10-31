@@ -247,7 +247,9 @@ namespace HayaseBot.commands
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            var button1 = new DiscordButtonComponent(ButtonStyle.Success, "GameCommands", "Next");
+            var Page1_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page2", ">>");
+            var Page1_Btn2 = new DiscordButtonComponent(ButtonStyle.Success, "Page1", "<<");
+
 
             var embeder = new DiscordEmbedBuilder
             {
@@ -264,7 +266,7 @@ namespace HayaseBot.commands
 
             var message = new DiscordMessageBuilder()
                 .WithEmbed(embeder)
-                .AddComponents(button1);
+                .AddComponents(Page1_Btn2, Page1_Btn);
 
             await ctx.RespondAsync(message);
             return;
