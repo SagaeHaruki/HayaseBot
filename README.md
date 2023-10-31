@@ -4,12 +4,17 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Oct. 31, 2023]
+- Slash Command Configuration (BETA - to see if slash command will work)
+- Command Buttons (Some command will have a button function)
+- Fix Help Button on (Program.cs)
+  
+<h1>Past Changes</h1>
+
 - [Oct. 30, 2023]
 - Fixing the buttons
 - Reviewing the help Command
 - Added More buttons
-  
-<h1>Past Changes</h1>
 
 - [Oct. 29, 2023]
 - Removed Default Help Command (Yeah you can have a default help command with DSharp+)
