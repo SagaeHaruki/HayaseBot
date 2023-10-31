@@ -179,6 +179,7 @@
     <Compile Include="config\caster_reader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="slashcommands\InformSLCommand.cs" />
     <Compile Include="slashcommands\SlashCommand.cs" />
   </ItemGroup>
   <ItemGroup>

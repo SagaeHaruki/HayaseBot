@@ -86,6 +86,7 @@ namespace HayaseBot
             Commands.RegisterCommands<WelcomerCommands>();
 
             SlashCommandsConfig.RegisterCommands<SlashCommand>();
+            SlashCommandsConfig.RegisterCommands<InformSLCommand>();
 
             // Interactivity
 
