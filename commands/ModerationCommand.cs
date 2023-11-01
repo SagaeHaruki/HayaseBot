@@ -305,6 +305,18 @@ namespace HayaseBot.commands
             }
         }
 
+        [Command("timoutlist")]
+        [Description("List of the time for timeout command")]
+        [RequirePermissions(Permissions.Administrator)]
+        public async Task TOList(CommandContext ctx)
+        {
+            // Color Randomizer
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+        }
+
         /*
          * Clear Command (Max 14 days of message)
          */
