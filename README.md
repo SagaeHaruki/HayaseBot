@@ -4,13 +4,18 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Nov. 1, 2023]
+- Added Timeout Command
+- Added Timoutlist Command (Show time list)
+- Fix some command issue after adding button function
+  
+<h1>Past Changes</h1>
+
 - [Oct. 31, 2023]
 - Slash Command Configuration (BETA - to see if slash command will work)
 - Command Buttons (Some command will have a button function)
 - Fix Help Button on (Program.cs)
 - Added Help in Slash Command
-  
-<h1>Past Changes</h1>
 
 - [Oct. 30, 2023]
 - Fixing the buttons
