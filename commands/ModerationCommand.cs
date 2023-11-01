@@ -3,11 +3,14 @@ using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
+using DSharpPlus.Interactivity.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -216,7 +219,7 @@ namespace HayaseBot.commands
         [Command("timeout")]
         [Description("Timeout a member from the Server")]
         [RequirePermissions(Permissions.Administrator)]
-        public async Task TimeoutCommand(CommandContext ctx, DiscordMember target = null, string timer = "60 seconds", [RemainingText] string reason = null)
+        public async Task TimeoutCommand(CommandContext ctx, DiscordMember target = null, [RemainingText] string reason = null)
         {
             // Color Randomizer
             int red = random.Next(256);
@@ -239,12 +242,9 @@ namespace HayaseBot.commands
             }
             else
             {
-
                 var targetPerms = target.PermissionsIn(ctx.Channel);
                 var isABot = target.Id;
                 var cmdUser = ctx.User.Id;
-
-
 
                 if (targetPerms.HasPermission(Permissions.Administrator))
                 {
@@ -286,19 +286,83 @@ namespace HayaseBot.commands
                 }
                 else
                 {
-                    // If user selected 60 Seconds
-                    if (timer == "60 seconds")
+                    //// If user successfully timeout the user
+                    //await target.TimeoutAsync(DateTimeOffset.Now.AddSeconds(60), reason);
+
+                    //var embed1 = new DiscordEmbedBuilder
+                    //{
+                    //    Title = ctx.User.Username + " Timed out " + target.Username + "\nTime: 60 Seconds\nReason: " + reason,
+                    //    Color = randomCol,
+                    //    Timestamp = DateTime.UtcNow
+                    //};
+                    //await ctx.RespondAsync(embed1);
+                    //return;
+
+                    var button1 = new DiscordButtonComponent(ButtonStyle.Success, "60s", "60sec");
+                    var interactivity = ctx.Client.GetInteractivity();
+
+                    // Send an embedded Message
+                    var embeder = new DiscordEmbedBuilder
                     {
-                        // If user successfully timeout the user
+                        Title = "Timeout Command!",
+                        Description = "User: " + target.Username + "\nReason: " + reason,
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow,
+                    };
+
+                    var message = new DiscordMessageBuilder()
+                        .AddEmbed(embeder)
+                        .AddComponents(button1);
+
+
+                    // Convert message builder to normal message
+                    var messenger = await ctx.RespondAsync(message);
+
+                    // Check if button is sued within 15 seconds or the command fill failed
+                    var resulter = await interactivity.WaitForButtonAsync(messenger, ctx.User, TimeSpan.FromSeconds(15));
+
+                    if(resulter.Result.User.Id != cmdUser)
+                    {
+                        var embed1 = new DiscordEmbedBuilder
+                        {
+                            Title = "Failed to use Timeout Command",
+                            Description = "Other User Tried to press the button",
+                            Color = randomCol,
+                            Timestamp = DateTime.UtcNow
+                        };
+                        var message2 = new DiscordMessageBuilder()
+                            .WithEmbed(embed1);
+                        await messenger.ModifyAsync(message2);
+                    }
+
+                    if (resulter.Result.Id == "60s")
+                    {
                         await target.TimeoutAsync(DateTimeOffset.Now.AddSeconds(60), reason);
 
                         var embed1 = new DiscordEmbedBuilder
                         {
-                            Title = ctx.User.Username + " Timed out " + target.Username + "\nTime: 60 Seconds\nReason:" + reason,
+                            Title = "User has been timed out!",
+                            Description = "User: " + target.Username + "\nTime: 60 Seconds" + "\nReason: " + reason,
                             Color = randomCol,
                             Timestamp = DateTime.UtcNow
                         };
-                        await ctx.RespondAsync(embed1);
+                        var message2 = new DiscordMessageBuilder()
+                            .WithEmbed(embed1);
+                        await messenger.ModifyAsync(message2);
+                    }
+
+                    if (resulter.TimedOut)
+                    {
+                        var embed1 = new DiscordEmbedBuilder
+                        {
+                            Title = "Failed to timeout user!",
+                            Description = "You ran out of time",
+                            Color = randomCol,
+                            Timestamp = DateTime.UtcNow
+                        };
+                        var message2 = new DiscordMessageBuilder()
+                            .WithEmbed(embed1);
+                        await messenger.ModifyAsync(message2);
                         return;
                     }
                 }
@@ -315,6 +379,16 @@ namespace HayaseBot.commands
             int green = random.Next(256);
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+            var embed1 = new DiscordEmbedBuilder
+            {
+                Title = "List of Timout (Time)",
+                Description = "Usage: *>timeout <@username> <time> <reason>*",
+                Color = randomCol,
+                Timestamp = DateTime.UtcNow
+            };
+            await ctx.RespondAsync(embed1);
+            return;
+
         }
 
         /*
