@@ -36,52 +36,11 @@ namespace HayaseBot.commands
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            // User to ban and command user 
-            var targetPerms = target.PermissionsIn(ctx.Channel);
-            var isABot = target.Id;
-            var cmdUser = ctx.User.Id;
-            var targetName = target.DisplayName;
-
-            if (targetPerms.HasPermission(Permissions.Administrator))
+            if (target == null)
             {
-
-                // If user doesn't have admin permissions
-
                 var embed1 = new DiscordEmbedBuilder
                 {
-                    Title = "You cannot kick this user with Administrator Permission!",
-                    Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
-                };
-                await ctx.RespondAsync(embed1);
-                return;
-            }
-            else if (cmdUser == target.Id)
-            {
-
-                // if user tried to kick themselves
-
-                var embed1 = new DiscordEmbedBuilder
-                {
-                    Title = "You cannot kick Yourself!",
-                    Color = randomCol,
-                    Timestamp = DateTime.UtcNow,
-                };
-                await ctx.RespondAsync(embed1);
-                return;
-            }
-            else if (isABot == 1033001102687346718)
-            {
-
-                // This part if the user tried to kick the bot
-
-                var embed1 = new DiscordEmbedBuilder
-                {
-                    Title = "You cannot kick ME!",
+                    Title = "Please specity a member to ban!",
                     Color = randomCol,
                     Timestamp = DateTime.UtcNow
                 };
@@ -90,19 +49,73 @@ namespace HayaseBot.commands
             }
             else
             {
-
-                // If user successfully kicked the user
-
-                await target.RemoveAsync(reason); // Kicks the user
-
-                var embed1 = new DiscordEmbedBuilder
+                // User to ban and command user 
+                var targetPerms = target.PermissionsIn(ctx.Channel);
+                var isABot = target.Id;
+                var cmdUser = ctx.User.Id;
+                var targetName = target.DisplayName;
+                if (targetPerms.HasPermission(Permissions.Administrator))
                 {
-                    Title = "The User " + target.DisplayName + " is Kicked by " + ctx.User.Username + " from the Server! \nReason: " + reason,
-                    Color = randomCol,
-                    Timestamp = DateTime.UtcNow
-                };
-                await ctx.RespondAsync(embed1);
-                return;
+
+                    // If user doesn't have admin permissions
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot kick this user with Administrator Permission!",
+                        Color = randomCol,
+                        Footer = new DiscordEmbedBuilder.EmbedFooter
+                        {
+                            Text = DateTime.Now.ToString("hh:mm tt"),
+                            IconUrl = null
+                        }
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else if (cmdUser == target.Id)
+                {
+
+                    // if user tried to kick themselves
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot kick Yourself!",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow,
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else if (isABot == 1033001102687346718)
+                {
+
+                    // This part if the user tried to kick the bot
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot kick ME!",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else
+                {
+
+                    // If user successfully kicked the user
+
+                    await target.RemoveAsync(reason); // Kicks the user
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "The User " + target.DisplayName + " is Kicked by " + ctx.User.Username + " from the Server! \nReason: " + reason,
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
             }
         }
 
@@ -113,7 +126,7 @@ namespace HayaseBot.commands
         [Command("ban")]
         [Description("Ban a user from the Server")]
         [RequirePermissions(Permissions.Administrator)]
-        public async Task BanCommand(CommandContext ctx, DiscordMember target, [RemainingText] string reason = null)
+        public async Task BanCommand(CommandContext ctx, DiscordMember target = null, [RemainingText] string reason = null)
         {
             // Color Randomizer
             int red = random.Next(256);
@@ -121,48 +134,103 @@ namespace HayaseBot.commands
             int blue = random.Next(256);
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
-            // User to ban and command user 
-            var targetPerms = target.PermissionsIn(ctx.Channel);
-            var isABot = target.Id;
-            var cmdUser = ctx.User.Id;
-            var targetName = target.DisplayName;
-
-            if (targetPerms.HasPermission(Permissions.Administrator))
+            if (target == null)
             {
-
-                // If user have administration
-
                 var embed1 = new DiscordEmbedBuilder
                 {
-                    Title = "You cannot ban this user with Administrator Permission!",
+                    Title = "Please specity a member to ban!",
                     Color = randomCol,
                     Timestamp = DateTime.UtcNow
                 };
                 await ctx.RespondAsync(embed1);
                 return;
             }
-            else if (cmdUser == target.Id)
+            else
             {
-
-                // if user tried to ban themselves
-
-                var embed1 = new DiscordEmbedBuilder
+                // User to ban and command user 
+                var targetPerms = target.PermissionsIn(ctx.Channel);
+                var isABot = target.Id;
+                var cmdUser = ctx.User.Id;
+                if (targetPerms.HasPermission(Permissions.Administrator))
                 {
-                    Title = "You cannot ban Yourself!",
-                    Color = randomCol,
-                    Timestamp = DateTime.UtcNow
-                };
-                await ctx.RespondAsync(embed1);
-                return;
+                    // If user have administration
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot ban this user with Administrator Permission!",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else if (cmdUser == target.Id)
+                {
+
+                    // if user tried to ban themselves
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot ban Yourself!",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else if (isABot == 1033001102687346718)
+                {
+
+                    // This part if the user tried to ban the bot
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot ban ME!",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else
+                {
+
+                    // If user successfully banned the user
+
+                    await target.BanAsync(reason: reason); // Ban' the user
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "The User " + target.DisplayName + " is banned by " + ctx.User.Username + " from the Server! \nReason: " + reason,
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
             }
-            else if (isABot == 1033001102687346718)
+        }
+        /*
+         * Timeout Command
+         */
+        [Command("timeout")]
+        [Description("Timeout a member from the Server")]
+        [RequirePermissions(Permissions.Administrator)]
+        public async Task TimeoutCommand(CommandContext ctx, DiscordMember target = null, string timer = "60 seconds", [RemainingText] string reason = null)
+        {
+            // Color Randomizer
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+
+
+            if (target == null)
             {
-
-                // This part if the user tried to ban the bot
-
                 var embed1 = new DiscordEmbedBuilder
                 {
-                    Title = "You cannot ban ME!",
+                    Title = "Please specity a member to ban!",
                     Color = randomCol,
                     Timestamp = DateTime.UtcNow
                 };
@@ -172,18 +240,68 @@ namespace HayaseBot.commands
             else
             {
 
-                // If user successfully banned the user
+                var targetPerms = target.PermissionsIn(ctx.Channel);
+                var isABot = target.Id;
+                var cmdUser = ctx.User.Id;
 
-                await target.BanAsync(reason: reason); // Ban' the user
 
-                var embed1 = new DiscordEmbedBuilder
+
+                if (targetPerms.HasPermission(Permissions.Administrator))
                 {
-                    Title = "The User " + target.DisplayName + " is banned by " + ctx.User.Username + " from the Server! \nReason: " + reason,
-                    Color = randomCol,
-                    Timestamp = DateTime.UtcNow
-                };
-                await ctx.RespondAsync(embed1);
-                return;
+                    // If user have administration
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot ban this user with Administrator Permission!",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else if (cmdUser == target.Id)
+                {
+                    // If user tried to Timout themselve
+
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot ban Yourself!",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else if (isABot == 1033001102687346718)
+                {
+                    // If the user tried to timeout the bot
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You cannot ban ME!",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.RespondAsync(embed1);
+                    return;
+                }
+                else
+                {
+                    // If user selected 60 Seconds
+                    if (timer == "60 seconds")
+                    {
+                        // If user successfully timeout the user
+                        await target.TimeoutAsync(DateTimeOffset.Now.AddSeconds(60), reason);
+
+                        var embed1 = new DiscordEmbedBuilder
+                        {
+                            Title = ctx.User.Username + " Timed out " + target.Username + "\nTime: 60 Seconds\nReason:" + reason,
+                            Color = randomCol,
+                            Timestamp = DateTime.UtcNow
+                        };
+                        await ctx.RespondAsync(embed1);
+                        return;
+                    }
+                }
             }
         }
 
