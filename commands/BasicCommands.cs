@@ -15,6 +15,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using DSharpPlus.Interactivity;
 using System.Threading;
+using DSharpPlus.SlashCommands;
 
 namespace HayaseBot.commands
 {
@@ -240,7 +241,7 @@ namespace HayaseBot.commands
          */
 
         [Command("help")]
-        public async Task HelpCommand(CommandContext ctx)
+        public async Task HelpCommand(CommandContext ctx, InteractionContext ixt)
         {
             // Colors Embed
             int red = random.Next(256);
@@ -268,7 +269,7 @@ namespace HayaseBot.commands
                 .WithEmbed(embeder)
                 .AddComponents(Page1_Btn2, Page1_Btn);
 
-            await ctx.RespondAsync(message);
+            await ixt.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(Page1_Btn2, Page1_Btn).AsEphemeral(true));
             return;
         }
     }
