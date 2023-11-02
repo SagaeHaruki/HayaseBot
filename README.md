@@ -2,6 +2,9 @@
 Discord bot using C# 
 ---
 
+<h1>Dev's Note:</h1>
+- Please note that the Notification Sound is not included in the package, you will provide your own
+
 <h1>Today's Changes</h1>
 
 - [Nov. 2, 2023]
