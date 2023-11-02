@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using DSharpPlus.Interactivity;
+using System.Threading;
 
 namespace HayaseBot.commands
 {
@@ -249,7 +250,6 @@ namespace HayaseBot.commands
 
             var Page1_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page2", ">>");
             var Page1_Btn2 = new DiscordButtonComponent(ButtonStyle.Success, "Page1", "<<");
-
 
             var embeder = new DiscordEmbedBuilder
             {

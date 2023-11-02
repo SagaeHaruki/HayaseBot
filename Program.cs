@@ -110,8 +110,8 @@ namespace HayaseBot
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
             // Button For Page 1
-            var Page1_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page2", ">>"); 
-            var Page1_Btn2 = new DiscordButtonComponent(ButtonStyle.Success, "Page1", "<<"); 
+            var Page1_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page2", ">>");
+            var Page1_Btn2 = new DiscordButtonComponent(ButtonStyle.Success, "Page1", "<<");
 
             // Button For Page 2
             var Page2_Btn = new DiscordButtonComponent(ButtonStyle.Success, "Page3", ">>");
@@ -219,10 +219,6 @@ namespace HayaseBot
                 await cice.Interaction.CreateResponseAsync(InteractionResponseType.UpdateMessage, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(Page4_Btn2));
                 return;
             }
-
-            
-
-
         }
 
         // Command Cooldown Cat

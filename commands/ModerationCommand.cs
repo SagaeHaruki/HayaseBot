@@ -285,19 +285,7 @@ namespace HayaseBot.commands
                     return;
                 }
                 else
-                {
-                    //// If user successfully timeout the user
-                    //await target.TimeoutAsync(DateTimeOffset.Now.AddSeconds(60), reason);
-
-                    //var embed1 = new DiscordEmbedBuilder
-                    //{
-                    //    Title = ctx.User.Username + " Timed out " + target.Username + "\nTime: 60 Seconds\nReason: " + reason,
-                    //    Color = randomCol,
-                    //    Timestamp = DateTime.UtcNow
-                    //};
-                    //await ctx.RespondAsync(embed1);
-                    //return;
-
+                {                  
                     var button1 = new DiscordButtonComponent(ButtonStyle.Success, "60s", "60sec");
                     var interactivity = ctx.Client.GetInteractivity();
 
