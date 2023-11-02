@@ -241,7 +241,7 @@ namespace HayaseBot.commands
          */
 
         [Command("help")]
-        public async Task HelpCommand(CommandContext ctx, InteractionContext ixt)
+        public async Task HelpCommand(CommandContext ctx)
         {
             // Colors Embed
             int red = random.Next(256);
@@ -269,7 +269,7 @@ namespace HayaseBot.commands
                 .WithEmbed(embeder)
                 .AddComponents(Page1_Btn2, Page1_Btn);
 
-            await ixt.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent(null).AddEmbed(embeder).AddComponents(Page1_Btn2, Page1_Btn).AsEphemeral(true));
+            await ctx.RespondAsync(message);
             return;
         }
     }

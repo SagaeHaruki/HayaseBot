@@ -17,6 +17,7 @@ using HayaseBot.slashcommands;
 using System.Linq;
 using System.Diagnostics;
 using Tulpep.NotificationWindow;
+using System.Media;
 
 namespace HayaseBot
 {
@@ -284,32 +285,39 @@ namespace HayaseBot
         // Message Logger
         private static async Task Event_Handler(DiscordClient sender, MessageCreateEventArgs event_phase)
         {
-            var userID = event_phase.Author.Id;
-            var GuildName = event_phase.Guild.Name;
-            var userName = event_phase.Author.Username;
-            var channelName = event_phase.Channel.Name;
-            var message_sent = event_phase.Message.Content;
+            try
+            {
+                var userID = event_phase.Author.Id;
+                var GuildName = event_phase.Guild.Name;
+                var userName = event_phase.Author.Username;
+                var channelName = event_phase.Channel.Name;
+                var message_sent = event_phase.Message.Content;
 
-            if (userID == 1033001102687346718)
-            {
-                // Nothing happens if the user ID is the bot (or this will loop)
-            }
-            else
-            {
-                foreach (var mentionedUser in event_phase.MentionedUsers)
+                if (userID == 1033001102687346718)
                 {
-                    ulong mentionedUserId = mentionedUser.Id;
-
-                    if (mentionedUserId == 817577444805836831)
-                    {
-
-                    }
+                    // Nothing happens if the user ID is the bot (or this will loop)
                 }
+                else
+                {
+                    foreach (var mentionedUser in event_phase.MentionedUsers)
+                    {
+                        ulong mentionedUserId = mentionedUser.Id;
 
-                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  ChannelName: " + channelName + "  |  Message Sent:  " + message_sent);
-                return;
+                        if (mentionedUserId == 817577444805836831)
+                        {
+                            SoundPlayer player = new SoundPlayer("Hoshino1.wav");
+                            player.Play();
+                        }
+                    }
+
+                    Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  ChannelName: " + channelName + "  |  Message Sent:  " + message_sent);
+                    return;
+                }
             }
-
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
 
         // Stating the Bot Client
