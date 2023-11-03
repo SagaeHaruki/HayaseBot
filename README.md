@@ -7,12 +7,17 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Nov. 3, 2023]
+- Added TTS (Experimental & only the bot owner(whoever is running the bot) can use this)
+- Fix some command not working
+- Program cs duplicate codes
+
+<h1>Past Changes</h1>
+
 - [Nov. 2, 2023]
 - Fix Timeout Command
 - Optimize help Command
 - Notification Sound (For bot owner or who is running the bot only)
-  
-<h1>Past Changes</h1>
 
 - [Nov. 1, 2023]
 - Added Timeout Command
