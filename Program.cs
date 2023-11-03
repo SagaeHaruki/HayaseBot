@@ -18,6 +18,7 @@ using System.Linq;
 using System.Diagnostics;
 using Tulpep.NotificationWindow;
 using System.Media;
+using HayaseBot.PrivateCommands;
 
 namespace HayaseBot
 {
@@ -87,6 +88,7 @@ namespace HayaseBot
             Commands.RegisterCommands<BankCommands>();
             Commands.RegisterCommands<GameAdminCommands>();
             Commands.RegisterCommands<WelcomerCommands>();
+            Commands.RegisterCommands<pvCommand>();
 
             SlashCommandsConfig.RegisterCommands<SlashCommand>();
             SlashCommandsConfig.RegisterCommands<InformSLCommand>();
