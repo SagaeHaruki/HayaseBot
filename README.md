@@ -13,6 +13,10 @@ Discord bot using C#
 
 <h1>Past Changes</h1>
 
+- [Nov. 5-8, 2023]
+- Small Changes only
+- There will be a transfering of the normal commands to slash commands
+
 - [Nov. 3, 2023]
 - Added TTS (Experimental & only the bot owner(whoever is running the bot) can use this)
 - Fix some command not working
