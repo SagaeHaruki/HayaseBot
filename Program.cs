@@ -19,6 +19,9 @@ using System.Diagnostics;
 using Tulpep.NotificationWindow;
 using System.Media;
 using HayaseBot.PrivateCommands;
+using DSharpPlus.SlashCommands.EventArgs;
+using DSharpPlus.SlashCommands.Attributes;
+using System.Windows.Forms;
 
 namespace HayaseBot
 {
@@ -62,7 +65,7 @@ namespace HayaseBot
             // Event Handler
             Client.MessageCreated += Event_Handler;
 
-            // FIX LATER
+            // Voice Chat Handler
             Client.VoiceStateUpdated += VoiceChannel_Handler;
 
             // Bot Command Prefix Finder
@@ -92,6 +95,8 @@ namespace HayaseBot
 
             SlashCommandsConfig.RegisterCommands<SlashCommand>();
             SlashCommandsConfig.RegisterCommands<InformSLCommand>();
+            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
+            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
 
             // Interactivity
 
@@ -226,6 +231,48 @@ namespace HayaseBot
             }
         }
 
+        private static async Task SlashCommandsHandler(SlashCommandsExtension sender, SlashCommandErrorEventArgs errs)
+        {
+            Random random = new Random();
+
+
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            var userName = errs.Context.User.Username;
+
+            /*
+             * Commands Cooldown (Slash Command Not included)
+             */
+            
+            if (errs.Exception is SlashExecutionChecksFailedException exception)
+            {
+                string timeLeft = string.Empty;
+                foreach (var check in exception.FailedChecks)
+                {
+                    var cmdCooldown = (SlashCooldownAttribute)check;
+                    timeLeft = cmdCooldown.GetRemainingCooldown(errs.Context).TotalSeconds.ToString();
+                }
+                int timeSec = (int)Math.Floor(Convert.ToDecimal(timeLeft));
+
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "Command on cooldown!! " + timeSec + "s",
+                    Color = randomCol,
+                    Footer = new DiscordEmbedBuilder.EmbedFooter
+                    {
+                        Text = DateTime.Now.ToString("hh:mm tt"),
+                        IconUrl = null
+                    }
+                };
+                await errs.Context.CreateResponseAsync(embed1);
+                Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  Used a Slash Command but was unable to due to command cooldowns");
+                return;
+            }
+        }
+
         // Command Cooldown Cat
         private static async Task CommandHandler(CommandsNextExtension sender, CommandErrorEventArgs err)
         {
@@ -237,6 +284,10 @@ namespace HayaseBot
             DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
 
             var userName = err.Context.User.Username;
+
+            /*
+             * Commands Cooldown (Slash Command Not included)
+             */
 
             if (err.Exception is ChecksFailedException exception)
             {

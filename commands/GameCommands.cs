@@ -1,17 +1,9 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
-using System;
-using DSharpPlus.Exceptions;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
-using System.Data.SqlClient;
-using System.Windows.Forms;
 using DSharpPlus.Entities;
-using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.CommandsNext.Exceptions;
+using System;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace HayaseBot.commands
 {

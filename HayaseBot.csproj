@@ -189,6 +189,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="slashcommands\GameSlashCommand.cs" />
     <Compile Include="slashcommands\InformSLCommand.cs" />
     <Compile Include="slashcommands\SlashCommand.cs" />
   </ItemGroup>
