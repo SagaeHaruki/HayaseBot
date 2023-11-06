@@ -13,7 +13,7 @@ Discord bot using C#
 
 <h1>Past Changes</h1>
 
-- [Nov. 5-8, 2023]
+- [Nov. 5, 2023]
 - Small Changes only
 - There will be a transfering of the normal commands to slash commands
 
