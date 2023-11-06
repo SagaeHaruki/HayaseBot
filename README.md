@@ -8,8 +8,12 @@ Discord bot using C#
 <h1>Today's Changes</h1>
 
 - [Nov. 4-8, 2023]
-- There will be no updates to this bot this upcoming 3-4 days (Exams coming up)
+- There will be Small updates to this bot this upcoming 3-4 days (Exams coming up)
 - After exams i will be adding a lot of features that this bot needs
+
+- [Nov. 6, 2023]
+- Fix Slash Commands cooldown (There was none)
+- There will be a transfering of the normal commands to slash commands
 
 <h1>Past Changes</h1>
 
