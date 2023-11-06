@@ -12,6 +12,7 @@ Discord bot using C#
 - After exams i will be adding a lot of features that this bot needs
 
 - [Nov. 6, 2023]
+- Added Slash Commands Cooldown
 - Fix Slash Commands cooldown (There was none)
 - There will be a transfering of the normal commands to slash commands
 
