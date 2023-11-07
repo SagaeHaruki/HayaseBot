@@ -244,7 +244,7 @@ namespace HayaseBot
             var userName = errs.Context.User.Username;
 
             /*
-             * Commands Cooldown (Slash Command Not included)
+             * Slash Commands Cooldown
              */
             
             if (errs.Exception is SlashExecutionChecksFailedException exception)

@@ -1,4 +1,5 @@
-﻿using DSharpPlus.CommandsNext.Attributes;
+﻿using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
 using DSharpPlus.SlashCommands.Attributes;
@@ -163,6 +164,120 @@ namespace HayaseBot.slashcommands
                 connection1.Close();
                 return;
             } // Ends Here
+        }
+
+        [SlashCommand("bal","Shows your balance")]
+        public async Task BalanceCommand(InteractionContext ctx, DiscordMember target = null)
+        {
+            // Color Randomizer
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            var cmdUser = ctx.User.Id;
+
+            // SQL CONNECT
+            SqlConnection connection1 = new SqlConnection(sqlClientACC);
+            connection1.Open();
+
+            if (target != null)
+            {
+                // Select the user from database
+                // If not in the database then add first before adding the value of money
+                string userSelectDB = "Select * From UserBank Where UserID = '"+target.Id+"'";
+                SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
+                SqlDataReader readUser = selectUser.ExecuteReader();
+
+                // Reads the other user mentioned
+                if (readUser.Read())
+                {
+                    SqlConnection connection2 = new SqlConnection(sqlClientACC);
+                    connection2.Open();
+                    string runCMDD = "Select Bank, Wallet From UserBank Where UserID = '"+target.Id+"'";
+                    SqlCommand AddAcc = new SqlCommand(runCMDD, connection2);
+                    SqlDataReader readAcc = AddAcc.ExecuteReader();
+
+                    // Reads the user's account in the Database
+                    while (readAcc.Read())
+                    {
+                        long walletBal = (long)readAcc["Wallet"];
+                        long bankBal = (long)readAcc["Bank"];
+
+                        var embed1 = new DiscordEmbedBuilder
+                        {
+                            Title = target.Username + "'s current balance is: ",
+                            Description = "Wallet: " + walletBal + "\nBank: " + bankBal,
+                            Color = randomCol,
+                            Timestamp = DateTime.UtcNow
+                        };
+                        await ctx.CreateResponseAsync(embed1);
+                        return;
+                    }
+                }
+                else
+                {
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "This user does not have any balance",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.CreateResponseAsync(embed1);
+                    return;
+                }
+            }
+            else
+            {
+                /*
+                 * Users now check the balance of other people
+                 */
+
+                // Select the user from database
+                // If not in the database then add first before adding the value of money
+                string userSelectDB = "Select * From UserBank Where UserID = '"+cmdUser+"'";
+                SqlCommand selectUser = new SqlCommand(userSelectDB, connection1);
+                SqlDataReader readUser = selectUser.ExecuteReader();
+
+                if (readUser.Read())
+                {
+                    // Read the user Account First
+                    SqlConnection connection2 = new SqlConnection(sqlClientACC);
+                    connection2.Open();
+                    string runCMDD = "Select Bank, Wallet From UserBank Where UserID = '"+cmdUser+"'";
+                    SqlCommand AddAcc = new SqlCommand(runCMDD, connection2);
+                    SqlDataReader readAcc = AddAcc.ExecuteReader();
+
+                    // Reads the user's account in the Database
+                    while (readAcc.Read())
+                    {
+                        long walletBal = (long)readAcc["Wallet"];
+                        long bankBal = (long)readAcc["Bank"];
+
+                        var embed1 = new DiscordEmbedBuilder
+                        {
+                            Title = "Your current balance is: ",
+                            Description = "Wallet: " + walletBal + "\nBank: " + bankBal,
+                            Color = randomCol,
+                            Timestamp = DateTime.UtcNow
+                        };
+                        await ctx.CreateResponseAsync(embed1);
+                        return;
+                    }
+                }
+                else
+                {
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "You are not registered in the database!",
+                        Description = "Use the beg command to register",
+                        Color = randomCol,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await ctx.CreateResponseAsync(embed1);
+                    return;
+                }
+            }
         }
     }
 }
