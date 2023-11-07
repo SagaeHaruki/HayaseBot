@@ -10,7 +10,7 @@ Discord bot using C#
 - [Nov. 7, 2023]
 - Transfer of Prefix Commands to Slash Commands
 - Fix some Slash commands cooldown, does not respond to the user
-- 
+- Update Nuget Packages
 
 <h1>Past Changes</h1>
 
