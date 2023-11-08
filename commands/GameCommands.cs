@@ -285,6 +285,7 @@ namespace HayaseBot.commands
         /*
          * Slot Machine Command
          */
+
         [Command("slotmachine")]
         [Cooldown(1, 5, CooldownBucketType.User)]
         public async Task SlotMachineCMD(CommandContext ctx)
