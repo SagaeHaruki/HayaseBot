@@ -7,12 +7,16 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Nov. 8, 2023]
+- Fix Slash Command Cooldown (Not The Prefix command)
+- Fix some Slash Commands
+
+<h1>Past Changes</h1>
+
 - [Nov. 7, 2023]
 - Transfer of Prefix Commands to Slash Commands
 - Fix some Slash commands cooldown, does not respond to the user
 - Update Nuget Packages
-
-<h1>Past Changes</h1>
 
 - [Nov. 6, 2023]
 - Added Slash Commands Cooldown
