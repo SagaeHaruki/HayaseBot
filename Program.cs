@@ -70,10 +70,7 @@ namespace HayaseBot
             };
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
-            var SlashCommandsConfig = Client.UseSlashCommands(new SlashCommandsConfiguration
-            {
-                Services = null
-            });
+            var SlashCommandsConfig = Client.UseSlashCommands();
 
             // Slash Commands
             SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
