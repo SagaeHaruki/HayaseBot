@@ -4,6 +4,7 @@ Discord bot using C#
 
 <h1>Dev's Note:</h1>
 - Please note that the Notification Sound is not included in the package, you will provide your own
+- Slash Commands Will be continued to be transfered BUT will be temporarily unavailable due to some Bugs of it not refreshing or just simply will not respond (Even the dev cannot fix this issue atm)
 
 <h1>Today's Changes</h1>
 
