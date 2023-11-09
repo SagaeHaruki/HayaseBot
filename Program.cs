@@ -25,6 +25,7 @@ namespace HayaseBot
     {
         private static DiscordClient Client { get; set; }
         private static CommandsNextExtension Commands { get; set; }
+        public IServiceProvider Services { internal get; set; } = new ServiceCollection().BuildServiceProvider(true);
 
         // Bot Startup
         static async Task Main(string[] args)
@@ -53,7 +54,6 @@ namespace HayaseBot
             Client.Ready += Client_Ready;
             Client.ComponentInteractionCreated += HelpComamndButton;
 
-
             // Event Handler
             Client.MessageCreated += Event_Handler;
 
@@ -70,13 +70,16 @@ namespace HayaseBot
             };
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
-            // var SlashCommandsConfig = Client.UseSlashCommands();
+            var SlashCommandsConfig = Client.UseSlashCommands(new SlashCommandsConfiguration
+            {
+                Services = null
+            });
 
             // Slash Commands
-            //SlashCommandsConfig.RegisterCommands<SlashCommand>();
-            //SlashCommandsConfig.RegisterCommands<InformSLCommand>();
-            //SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
-            //SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
+            SlashCommandsConfig.RegisterCommands<SlashCommand>(null);
+            SlashCommandsConfig.RegisterCommands<InformSLCommand>(null);
+            SlashCommandsConfig.RegisterCommands<GameSlashCommand>(null);
+            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
 
             // Command Error
             Commands.CommandErrored += CommandHandler;
@@ -91,13 +94,10 @@ namespace HayaseBot
             Commands.RegisterCommands<WelcomerCommands>();
             Commands.RegisterCommands<pvCommand>();
 
-
             // Interactivity
-
             var interactivity = Client.UseInteractivity(new InteractivityConfiguration
             {
                 Timeout = TimeSpan.FromSeconds(30)
-
             });
 
             // Connect the Client
