@@ -280,6 +280,10 @@ namespace HayaseBot.slashcommands
             }
         }
 
+        /*
+         * Slot Machine Command
+         */
+
         [SlashCommand("slotmachine", "Use the slot machine")]
         [SlashCooldown(1, 5, SlashCooldownBucketType.User)]
         public async Task SlotMachineCMD(InteractionContext ctx)
@@ -485,6 +489,45 @@ namespace HayaseBot.slashcommands
                 }
                 connection4.Close();
                 connection1.Close();
+                return;
+            }
+        }
+
+        /*
+         * Roll Command
+         */
+
+        [Command("roll")]
+        public async Task RollCommand(CommandContext ctx, [RemainingText] int amt = 100)
+        {
+            // Color Randomizer
+            int red = random.Next(256);
+            int green = random.Next(256);
+            int blue = random.Next(256);
+            DiscordColor randomCol = new DiscordColor((byte)red, (byte)green, (byte)blue);
+
+            int dice = random.Next(amt);
+
+            if (amt == 100)
+            {
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "You rolled the dice and got: " + dice,
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow
+                };
+                await ctx.RespondAsync(embed1);
+                return;
+            }
+            else
+            {
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "You rolled with the amount of: " + amt + " and got: " + dice,
+                    Color = randomCol,
+                    Timestamp = DateTime.UtcNow
+                };
+                await ctx.RespondAsync(embed1);
                 return;
             }
         }
