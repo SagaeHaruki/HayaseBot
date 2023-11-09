@@ -189,6 +189,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="slashcommands\GameSlashCommand.cs" />
+    <Compile Include="slashcommands\InformSLCommand.cs" />
+    <Compile Include="slashcommands\SlashCommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -203,8 +206,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scomands\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
