@@ -1,27 +1,23 @@
-﻿using System;
-using DSharpPlus;
+﻿using DSharpPlus;
 using DSharpPlus.CommandsNext;
-using DSharpPlus.EventArgs;
+using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.CommandsNext.Exceptions;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
+using DSharpPlus.Interactivity;
+using DSharpPlus.Interactivity.Extensions;
+using DSharpPlus.SlashCommands;
+using DSharpPlus.SlashCommands.Attributes;
+using DSharpPlus.SlashCommands.EventArgs;
 using HayaseBot.commands;
 using HayaseBot.config;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using DSharpPlus.SlashCommands;
-using DSharpPlus.CommandsNext.Exceptions;
-using DSharpPlus.CommandsNext.Attributes;
-using Microsoft.Extensions.DependencyInjection;
-using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.Interactivity;
-using HayaseBot.slashcommands;
-using System.Linq;
-using System.Diagnostics;
-using Tulpep.NotificationWindow;
-using System.Media;
 using HayaseBot.PrivateCommands;
-using DSharpPlus.SlashCommands.EventArgs;
-using DSharpPlus.SlashCommands.Attributes;
-using System.Windows.Forms;
+using HayaseBot.slashcommands;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Media;
+using System.Threading.Tasks;
 
 namespace HayaseBot
 {
@@ -51,10 +47,6 @@ namespace HayaseBot
                 LoggerFactory = loggerFactory
             };
 
-            var services = new ServiceCollection()
-            .AddSingleton<InteractivityExtension>()
-            .BuildServiceProvider();
-
             // Ready Client to Start
             /* !!! IMPORTANT READY MUST BE FIRST OR THE CLIENT WILL NOT RUN !!!*/
             Client = new DiscordClient(config_Haruki);
@@ -78,13 +70,13 @@ namespace HayaseBot
             };
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
-            var SlashCommandsConfig = Client.UseSlashCommands();
+            // var SlashCommandsConfig = Client.UseSlashCommands();
 
             // Slash Commands
-            SlashCommandsConfig.RegisterCommands<SlashCommand>();
-            SlashCommandsConfig.RegisterCommands<InformSLCommand>();
-            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
-            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
+            //SlashCommandsConfig.RegisterCommands<SlashCommand>();
+            //SlashCommandsConfig.RegisterCommands<InformSLCommand>();
+            //SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
+            //SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
 
             // Command Error
             Commands.CommandErrored += CommandHandler;
