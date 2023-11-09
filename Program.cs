@@ -80,6 +80,12 @@ namespace HayaseBot
             Commands = Client.UseCommandsNext(config_Prefix);
             var SlashCommandsConfig = Client.UseSlashCommands();
 
+            // Slash Commands
+            SlashCommandsConfig.RegisterCommands<SlashCommand>();
+            SlashCommandsConfig.RegisterCommands<InformSLCommand>();
+            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
+            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
+
             // Command Error
             Commands.CommandErrored += CommandHandler;
 
@@ -93,16 +99,13 @@ namespace HayaseBot
             Commands.RegisterCommands<WelcomerCommands>();
             Commands.RegisterCommands<pvCommand>();
 
-            SlashCommandsConfig.RegisterCommands<SlashCommand>();
-            SlashCommandsConfig.RegisterCommands<InformSLCommand>();
-            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
-            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
 
             // Interactivity
 
             var interactivity = Client.UseInteractivity(new InteractivityConfiguration
             {
                 Timeout = TimeSpan.FromSeconds(30)
+
             });
 
             // Connect the Client
