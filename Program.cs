@@ -12,7 +12,6 @@ using DSharpPlus.SlashCommands.EventArgs;
 using HayaseBot.commands;
 using HayaseBot.config;
 using HayaseBot.PrivateCommands;
-using HayaseBot.slashcommands;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
@@ -76,10 +75,7 @@ namespace HayaseBot
             });
 
             // Slash Commands
-            SlashCommandsConfig.RegisterCommands<SlashCommand>(null);
-            SlashCommandsConfig.RegisterCommands<InformSLCommand>(null);
-            SlashCommandsConfig.RegisterCommands<GameSlashCommand>(null);
-            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
+            // SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
 
             // Command Error
             Commands.CommandErrored += CommandHandler;

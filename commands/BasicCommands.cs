@@ -15,7 +15,6 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using DSharpPlus.Interactivity;
 using System.Threading;
-using DSharpPlus.SlashCommands;
 
 namespace HayaseBot.commands
 {

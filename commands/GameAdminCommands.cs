@@ -2,7 +2,6 @@
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;

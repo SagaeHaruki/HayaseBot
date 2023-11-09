@@ -4,7 +4,6 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity.Extensions;
-using DSharpPlus.SlashCommands;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
