@@ -74,7 +74,11 @@ namespace HayaseBot
 
             // Slash Commands
             SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
+            SlashCommandsConfig.RegisterCommands<SlashCommand>();
+            SlashCommandsConfig.RegisterCommands<InformSLCommand>();
+            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
             SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
+            await SlashCommandsConfig.RefreshCommands();
 
             // Command Error
             Commands.CommandErrored += CommandHandler;

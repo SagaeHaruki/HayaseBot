@@ -191,6 +191,7 @@
     </Compile>
     <Compile Include="slashcommands\GameSlashCommand.cs" />
     <Compile Include="slashcommands\InformSLCommand.cs" />
+    <Compile Include="slashcommands\SearchSlashCmd.cs" />
     <Compile Include="slashcommands\SlashCommand.cs" />
   </ItemGroup>
   <ItemGroup>
