@@ -11,9 +11,13 @@ Discord bot using C#
 
 - [Nov. 9, 2023]
 - Continuation of Prefix Command to Slash Command Transfer
-- Fix Some issues
+- Trying to fix slash command not registering
 
 <h1>Past Changes</h1>
+
+- [Nov. 9, 2023]
+- Continuation of Prefix Command to Slash Command Transfer
+- Fix Some issues
 
 - [Nov. 8, 2023]
 - Fix Slash Command Cooldown (Not The Prefix command)
