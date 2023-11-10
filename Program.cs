@@ -23,13 +23,13 @@ namespace HayaseBot
 {
     internal class Program
     {
-        private static DiscordClient Client { get; set; }
+        public static DiscordClient Client { get; set; }
         private static CommandsNextExtension Commands { get; set; }
-        public IServiceProvider Services { internal get; set; } = new ServiceCollection().BuildServiceProvider(true);
 
         // Bot Startup
         static async Task Main(string[] args)
         {
+            // This will read the token and prefix
             var caster_haruki = new caster_reader();
             await caster_haruki.readCaster();
 
@@ -51,13 +51,17 @@ namespace HayaseBot
             // Ready Client to Start
             /* !!! IMPORTANT READY MUST BE FIRST OR THE CLIENT WILL NOT RUN !!!*/
             Client = new DiscordClient(config_Haruki);
+
+            // Interactivity default timeout    
+            var interactivity = Client.UseInteractivity(new InteractivityConfiguration
+            {
+                Timeout = TimeSpan.FromMinutes(2)
+            });
+
+            // Event Handlers
             Client.Ready += Client_Ready;
             Client.ComponentInteractionCreated += HelpComamndButton;
-
-            // Event Handler
             Client.MessageCreated += Event_Handler;
-
-            // Voice Chat Handler
             Client.VoiceStateUpdated += VoiceChannel_Handler;
 
             // Bot Command Prefix Finder
@@ -68,17 +72,10 @@ namespace HayaseBot
                 EnableDms = true,
                 EnableDefaultHelp = false
             };
+
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
             var SlashCommandsConfig = Client.UseSlashCommands();
-
-            // Slash Commands
-            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
-            SlashCommandsConfig.RegisterCommands<SlashCommand>();
-            SlashCommandsConfig.RegisterCommands<InformSLCommand>();
-            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
-            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
-            await SlashCommandsConfig.RefreshCommands();
 
             // Command Error
             Commands.CommandErrored += CommandHandler;
@@ -93,15 +90,24 @@ namespace HayaseBot
             Commands.RegisterCommands<WelcomerCommands>();
             Commands.RegisterCommands<pvCommand>();
 
-            // Interactivity
-            var interactivity = Client.UseInteractivity(new InteractivityConfiguration
-            {
-                Timeout = TimeSpan.FromSeconds(30)
-            });
+            // Slash Commands
+            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
+            SlashCommandsConfig.RegisterCommands<SlashCommand>();
+            SlashCommandsConfig.RegisterCommands<InformSLCommand>();
+            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
+            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
+            await SlashCommandsConfig.RefreshCommands();
 
             // Connect the Client
             await Client.ConnectAsync();
             await Task.Delay(-1);
+        }
+
+        // Stating the Bot Client
+        private static Task Client_Ready(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
+        {
+            Console.WriteLine("Engine has Started");
+            return Task.CompletedTask;
         }
 
         private static async Task HelpComamndButton(DiscordClient sender, ComponentInteractionCreateEventArgs cice)
@@ -365,13 +371,6 @@ namespace HayaseBot
             {
                 Console.WriteLine(ex.ToString());
             }
-        }
-
-        // Stating the Bot Client
-        private static Task Client_Ready(DiscordClient sender, DSharpPlus.EventArgs.ReadyEventArgs args)
-        {
-            Console.WriteLine("Engine has Started");
-            return Task.CompletedTask;
         }
     }
 }

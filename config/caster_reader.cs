@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HayaseBot.config
 {
-    internal class caster_reader
+    public class caster_reader
     {
         public string token { get; set; }
         public string prefix { get; set; }
