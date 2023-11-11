@@ -9,11 +9,14 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
-- [Nov. 9, 2023]
-- Continuation of Prefix Command to Slash Command Transfer
-- Trying to fix slash command not registering
+- [Nov. 11, 2023]
+- Finding ways to fix slash command
 
 <h1>Past Changes</h1>
+
+- [Nov. 10, 2023]
+- Continuation of Prefix Command to Slash Command Transfer
+- Trying to fix slash command not registering
 
 - [Nov. 9, 2023]
 - Continuation of Prefix Command to Slash Command Transfer
