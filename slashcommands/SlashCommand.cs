@@ -1,24 +1,27 @@
-﻿using DSharpPlus.Entities;
+﻿using DSharpPlus;
+using DSharpPlus.Entities;
 using DSharpPlus.SlashCommands;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HayaseBot.slashcommands
 {
     public class SlashCommand : ApplicationCommandModule
     {
-        [SlashCommand("test", "this is a test command")]
-        public async Task TestSlash(InteractionContext ctx)
+        [SlashCommand("test", "This is our first Slash Command")]
+        public async Task TestSlashCommand(InteractionContext ctx, [Choice("Pre-Defined Text", "afhajfjafjdghldghlhg")]
+                                                                   [Option("string", "Type in anything you want")] string text)
         {
-            var embed1 = new DiscordEmbedBuilder
+            await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
+                                                                                            .WithContent("Starting Slash Command...."));
+
+            var embedMessage = new DiscordEmbedBuilder()
             {
-                Title = "Test Command",
-                Timestamp = DateTime.UtcNow,
+                Title = text,
             };
-            await ctx.CreateResponseAsync(embed1);
+
+            await ctx.Channel.SendMessageAsync(embed: embedMessage);
         }
+
     }
 }

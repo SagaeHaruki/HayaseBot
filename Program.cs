@@ -13,7 +13,6 @@ using HayaseBot.commands;
 using HayaseBot.slashcommands;
 using HayaseBot.config;
 using HayaseBot.PrivateCommands;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Media;
@@ -75,7 +74,7 @@ namespace HayaseBot
 
             // Ready Client Command
             Commands = Client.UseCommandsNext(config_Prefix);
-            var SlashCommandsConfig = Client.UseSlashCommands();
+            var SLConfig = Client.UseSlashCommands();
 
             // Command Error
             Commands.CommandErrored += CommandHandler;
@@ -91,15 +90,18 @@ namespace HayaseBot
             Commands.RegisterCommands<pvCommand>();
 
             // Slash Commands
-            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
-            SlashCommandsConfig.RegisterCommands<SlashCommand>();
-            SlashCommandsConfig.RegisterCommands<InformSLCommand>();
-            SlashCommandsConfig.RegisterCommands<GameSlashCommand>();
-            SlashCommandsConfig.SlashCommandErrored += SlashCommandsHandler;
-            await SlashCommandsConfig.RefreshCommands();
+            SLConfig.RegisterCommands<SlashCommand>();
+            SLConfig.RegisterCommands<InformSLCommand>();
+            SLConfig.RegisterCommands<GameSlashCommand>();
+            SLConfig.SlashCommandErrored += SlashCommandsHandler;
+
+            foreach (var cmdss in SLConfig.RegisteredCommands.Count.ToString())
+            {
+                Console.WriteLine(cmdss);
+            }
 
             // Connect the Client
-            await Client.ConnectAsync();
+            Client.ConnectAsync().GetAwaiter().GetResult();
             await Task.Delay(-1);
         }
 
