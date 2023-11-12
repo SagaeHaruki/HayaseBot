@@ -9,10 +9,14 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
-- [Nov. 11, 2023]
-- Finding ways to fix slash command
+- [Nov. 12, 2023]
+- Enhancing the message logger
+- Fix some embeds
 
 <h1>Past Changes</h1>
+
+- [Nov. 11, 2023]
+- Finding ways to fix slash command
 
 - [Nov. 10, 2023]
 - Continuation of Prefix Command to Slash Command Transfer
