@@ -305,11 +305,7 @@ namespace HayaseBot
                 {
                     Title = "Command on cooldown!! " + timeSec + "s",
                     Color = randomCol,
-                    Footer = new DiscordEmbedBuilder.EmbedFooter
-                    {
-                        Text = DateTime.Now.ToString("hh:mm tt"),
-                        IconUrl = null
-                    }
+                    Timestamp = DateTime.UtcNow,
                 };
                 await err.Context.RespondAsync(embed1);
                 Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  Used a Command but was unable to due to command cooldowns");
@@ -324,14 +320,36 @@ namespace HayaseBot
             var userName = channel_phase.User.Username;
             var GuildName = channel_phase.Guild.Name;
 
+            // OOf i wonder what this do
+            var channelid = await Client.GetChannelAsync(1173092273534287953);
+
             // Logs everything
             if (channel_phase.Channel == null)
             {
+                // If the user left a Voice channel 
+                // Another note that the channel the user left cannot be fetched it will turn into a null
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "Voice Channel Logger",
+                    Description = "**User:** " + userName + "\n**Guild Name:** " + GuildName + "\n**Status:** Disconnected",
+                    Color = DiscordColor.Red,
+                    Timestamp = DateTime.UtcNow
+                };
+                await channelid.SendMessageAsync(embed1);
                 Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  Left the Channel " + channel_phase.Channel);
                 return;
             }
             else if(channel_phase.Channel != null)
             {
+                // If the user join a Voice channel anywhere
+                var embed1 = new DiscordEmbedBuilder
+                {
+                    Title = "Voice Channel Logger",
+                    Description = "**User:** " + userName + "\n**Guild Name:** " + GuildName + "\n**Channel Name:** " + channel_phase.Channel.Name + "\n**Status:** Connected",
+                    Color = DiscordColor.Green,
+                    Timestamp = DateTime.UtcNow
+                };
+                await channelid.SendMessageAsync(embed1);
                 Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  Joined the Channel >> " + channel_phase.Channel.Name);
                 return;
             }
@@ -347,6 +365,9 @@ namespace HayaseBot
                 var userName = event_phase.Author.Username;
                 var channelName = event_phase.Channel.Name;
                 var message_sent = event_phase.Message.Content;
+
+                // OOf i wonder what this do
+                var channelid = await Client.GetChannelAsync(1173092489029222490);
 
                 if (userID == 1033001102687346718)
                 {
@@ -364,6 +385,16 @@ namespace HayaseBot
                             player.Play();
                         }
                     }
+
+                    // Embeds the message send by a user
+                    var embed1 = new DiscordEmbedBuilder
+                    {
+                        Title = "Message Logger",
+                        Description = "**User:** " + userName + "\n**Guild Name:** " + GuildName + "\n**Channel Name:** " + channelName + "\n**Message Content:**\n" + message_sent,
+                        Color = DiscordColor.Green,
+                        Timestamp = DateTime.UtcNow
+                    };
+                    await channelid.SendMessageAsync(embed1);
 
                     Console.WriteLine("[TIME]: " + DateTime.Now + "  |  USERNAME:  " + userName + "  |  GUILD NAME: " + GuildName + "  |  ChannelName: " + channelName + "  |  Message Sent:  " + message_sent);
                     return;
