@@ -9,11 +9,16 @@ Discord bot using C#
 
 <h1>Today's Changes</h1>
 
+- [Nov. 13, 2023]
+- Fix logger on some files not working
+- Private Discord Server used to Log all Events
+- Added more logger feature to other commands
+
+<h1>Past Changes</h1>
+
 - [Nov. 12, 2023]
 - Enhancing the message logger
 - Fix some embeds
-
-<h1>Past Changes</h1>
 
 - [Nov. 11, 2023]
 - Finding ways to fix slash command
