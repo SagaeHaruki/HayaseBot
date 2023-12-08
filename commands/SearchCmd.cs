@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
+using System.Threading.Channels;
 
 namespace HayaseBot.commands
 {
@@ -448,6 +449,24 @@ namespace HayaseBot.commands
                 }
                 // SQL CONNECT CLOSE
                 connection1.Close();
+
+
+                var Client = ctx.Client;
+                // OOf i wonder what this do
+                var channelid = await Client.GetChannelAsync(1173091199750520893);
+                var command_User = ctx.User.Username;
+                var channel_name = ctx.Channel.Name;
+                var Guild_name = ctx.Guild.Name;
+
+                // Embeds the message send by a user
+                var embed3 = new DiscordEmbedBuilder
+                {
+                    Title = "Game Command Logger",
+                    Description = "**User:** " + command_User + "\n**Guild Name:** " + Guild_name + "\n**Channel Name:** " + channel_name,
+                    Color = DiscordColor.Green,
+                    Timestamp = DateTime.UtcNow
+                };
+                await channelid.SendMessageAsync(embed3);
             }
             catch (Exception exe)
             {
